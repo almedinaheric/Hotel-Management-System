@@ -1,0 +1,16 @@
+<div class="wrapper" *ngIf="!dataLoaded">
+    <mat-spinner class="spinner" diameter="50"></mat-spinner>
+  </div>
+  
+  <div class="wrapper" *ngIf="dataLoaded">
+    <div class="jedanGrad" *ngFor="let hotel of hoteli | slice:0:4">
+        <mat-card>
+          <img src="{{getSlika(hotel)}}" alt="{{ hotel.naziv }}" />
+          <mat-card-content>
+            <h2>{{ hotel.naziv }}</h2>
+            <p>⭐ {{ hotel.prosjecnaOcjena }}</p>
+          </mat-card-content>
+        </mat-card>
+    </div>
+  </div>
+  

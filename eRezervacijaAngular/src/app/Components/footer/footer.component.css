@@ -1,0 +1,13 @@
+.footer{
+    height: 10rem;
+    width: 100%;
+    background-color:var(--material-ui-primary);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 4rem;
+    position: relative;
+    bottom: 0;
+}
+  

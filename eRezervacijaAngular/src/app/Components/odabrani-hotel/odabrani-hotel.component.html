@@ -1,0 +1,99 @@
+<div class="wrapper">
+    <app-navbar [putanja]="'landingPage'"></app-navbar>
+    <div class="inner-wrapper">
+        <div class="top">
+            <button mat-button (click)="NaSearchResults()">
+                <div class="navigation">
+                  <mat-icon>arrow_back</mat-icon>
+                  <span>Nazad na početnu stranicu</span>
+                </div>
+            </button>
+        </div>
+        <div class="hotelDetaljiContent">
+            <div class="nazivZvjezdice">
+                <h1 id="hotelName">{{hotel?.naziv}}</h1>
+                <div id="star">
+                  <div id="stars" *ngFor="let i of [].constructor(hotel?.brojZvjezdica); let index=index">⭐</div>
+                </div>
+            </div>
+            <div class="adresaGradDrzava">
+                <p id="adresa" class="adresaitem">{{hotel?.adresa}}</p>
+                <p>|</p>
+                <p id="grad" class="adresaitem">{{grad?.name}}</p>
+                <p>|</p>
+                <p id="drzava" class="adresaitem">{{drzava?.name}}</p>
+                <p>|</p>
+                <p id="udaljenost" class="adresaitem">Do centra grada: {{hotel?.udaljenostOdCentraGrada}} km</p>
+                <p>|</p>
+                <p id="prosjecnaOcjena" class="adresaitem">Prosjecna ocjena: {{hotel?.prosjecnaOcjena}}</p>
+            </div>
+            <div class="slika" *ngIf="hotel">
+                <div class="left">
+                    <img src="{{getSlika(hotel)}}" alt="Slika hotela">
+                </div>
+                <div class="slikeSoba">
+                    <div class="wrapper spinnerWrapper" *ngIf="!dataLoaded">
+                        <h4>Ostale slike se učitavaju, pričekajte trenutak!</h4>
+                        <mat-spinner class="spinner" diameter="60"></mat-spinner>
+                      </div>
+
+                      <div class="ucitane" *ngIf="dataLoaded==true">
+                        <div class="grid-item" *ngFor="let s of slike.slice(0, 4)">
+                            <img class="jednaSlika" src="{{loadImage(s.slikaByteArray)}}" alt="Slika sobe">
+                        </div>
+                      </div>
+                </div>
+            </div>
+            <div class="opisDetalji">
+                <mat-card class="opis">
+                    <mat-card-content id="contentOpis" [style.max-height]="expanded ? 'none' : '15rem'" 
+                    [style.overflow]="expanded ? 'visible' : 'hidden'">
+                      <p>{{hotel?.opis}}</p>
+                    </mat-card-content>
+                    <button mat-button (click)="prosireno()">
+                        {{ expanded ? 'Show Less' : 'Show More' }}
+                    </button>
+                  </mat-card>
+                  <div class="informacije">
+                    <h2>INFORMACIJE I KONTAKT</h2>
+                    <h4>Broj spratova hotela: <label class="labelInfo">{{hotel?.brojSpratova}}</label></h4>
+                    <h4>Vrijeme Check In-a: <label class="labelInfo">{{hotel?.vrijemeCheckIna}}</label></h4>
+                    <h4>Vrijeme Check Out-a: <label class="labelInfo">{{hotel?.vrijemeCheckOuta}}</label></h4>
+                    <h4>Broj telefona: <label class="labelInfo">{{hotel?.brojTelefona}}</label></h4>
+                    <h4>Email: <label class="labelInfo">{{hotel?.emailHotela}}</label></h4>
+                  </div>
+            </div>
+            <div class="amenities">
+                <div id="divDetalji">
+                    <div class="detalji">
+                        <h3>U ponudu hotela su uključeni: </h3>
+                        <p class="detalj">{{ detalji.join(', ') }}</p>
+                      </div>
+                </div>
+            </div>
+            <mat-divider style="margin-top: 2rem;"></mat-divider>
+            <div class="rec">
+                <h2>RECENZIJE</h2>
+                <div class="recenzijeContainer" *ngIf="brojRecenzija!=0">
+                    <button mat-icon-button (click)="scroll(-1)" [disabled]="scrollLeftDisabled">
+                      <mat-icon>keyboard_arrow_left</mat-icon>
+                    </button>
+                    <div class="recenzije" #recenzije *ngFor="let recenzija of recenzije">
+                        <app-recenzija-card class="recenzija" [osoba]="recenzija.osobaIme" 
+                        [komentar]="recenzija.komentar" 
+                        [ocjena]="recenzija.ocjena"></app-recenzija-card>
+                    </div>
+                    <button id="showMoreButton" mat-icon-button (click)="scroll(1)" [disabled]="scrollRightDisabled">
+                      <mat-icon>keyboard_arrow_right</mat-icon>
+                    </button>
+                </div>
+                <div class="nemaRecenzija"  *ngIf="brojRecenzija==0">
+                    <h4 id="nemaRec">Ovaj hotel još uvijek nema recenzija!</h4>
+                </div>
+            </div>
+            <div class="pitanja">
+                <!-- #TODO: OVDJE URADITI SLANJE UPITA VLASNIKU HOTELA -->
+            </div>
+        </div>
+    </div>
+</div>

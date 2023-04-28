@@ -1,0 +1,55 @@
+<div class="wrapper">
+  <app-navbar [putanja]="'landingPage'"></app-navbar>
+  <div class="inner-wrapper">
+    <div class="filtersSide">
+      <button mat-button (click)="NaLandingPage()">
+        <div class="navigation">
+          <mat-icon>arrow_back</mat-icon>
+          <span>Nazad na početnu stranicu</span>
+        </div>
+      </button>
+      <h3>FILTRIRAJ PO:</h3>
+      <div class="filterZvjezdice">
+        <p>Broj zvjezdica</p>
+        <form [formGroup]="zvjezdiceForm" class="checkboxform">
+          <mat-checkbox *ngFor="let checkBox of zvjezdiceCheckBoxes" [formControl]="checkBox.control">{{ checkBox.label }}</mat-checkbox>
+        </form>
+      </div>
+      <div class="filterUdaljenost">
+        <p>Udaljenost od centra grada</p>
+        <form [formGroup]="udaljenostForm" class="checkboxform">
+          <mat-checkbox *ngFor="let checkBox of udaljenostCheckBoxes" [formControl]="checkBox.control">{{ checkBox.label }}</mat-checkbox>
+        </form>
+      </div>
+      <div class="filterOcjena">
+        <p>Prosjecna ocjena hotela</p>
+        <form [formGroup]="ocjenaForm" class="checkboxform">
+          <mat-checkbox *ngFor="let checkBox of ocjenaCheckBoxes" [formControl]="checkBox.control">{{ checkBox.label }}</mat-checkbox>
+        </form>
+      </div>
+      <button mat-raised-button color="primary" id="filtrirajbtn" (click)="Filtriraj()">Filtriraj</button>
+      <button mat-stroked-button id="reset" (click)="ResetFilter()">Reset Filters</button>
+    </div>
+    <div class="resultsSide">
+      <div class="searchResults" *ngFor="let result of hotelsSearched">
+        <app-hotel-card
+        [hotelName]="result.naziv"
+        [starRating]="result.brojZvjezdica"
+        [grad]="result.grad"
+        [udaljenost]="result.udaljenostOdCentraGrada"
+        [description]="result.opis"
+        [rating]="result.prosjecnaOcjena"
+        [image]="result.slika"
+        [hotelId]="result">
+      </app-hotel-card>
+      </div>
+    </div>
+  </div>
+  <mat-paginator id="paginator" [length]="response.totalCount"
+                 [pageSize]="response.pageSize"
+                 [pageSizeOptions]="[5, 10, 25]"
+                 (page)="PaginationChanged($event)"
+                 aria-label="Select page">
+  </mat-paginator>
+  <app-footer></app-footer>
+</div>

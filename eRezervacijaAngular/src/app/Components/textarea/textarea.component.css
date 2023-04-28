@@ -1,0 +1,8 @@
+.inputField{
+    width: 100%;
+}
+
+.inputField textarea{
+    min-height: 10rem;
+}
+

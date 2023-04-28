@@ -1,0 +1,8 @@
+<mat-form-field appearance="fill" id="selectBox">
+    <mat-label>{{label}}</mat-label>
+    <mat-select [formControl]="formControlInput">
+      <mat-option *ngFor="let input of passedArray" [value]="NameOrId=='name'?input.name:input.id">
+        {{input.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>

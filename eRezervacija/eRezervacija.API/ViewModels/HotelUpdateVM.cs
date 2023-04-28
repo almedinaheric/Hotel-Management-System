@@ -1,0 +1,25 @@
+﻿using System;
+namespace eRezervacija.API.ViewModels
+{
+	public class HotelUpdateVM
+	{
+        public string Naziv { get; set; }
+        public string Opis { get; set; }
+        public string Adresa { get; set; }
+        public int VlasnikID { get; set; }
+        public string EmailHotela { get; set; }
+        public string BrojTelefona { get; set; }
+        public string slika { get; set; }
+        public int GradID { get; set; }
+        public int UkupanBrojSoba { get; set; }
+        public int BrojJednokrevetnihSoba { get; set; }
+        public int BrojDvokrevetnihSoba { get; set; }
+        public int BrojTrokrevetnihSoba { get; set; }
+        public int BrojSpratova { get; set; }
+        public string VrijemeCheckIna { get; set; }
+        public string VrijemeCheckOuta { get; set; }
+        public int BrojZvjezdica { get; set; }
+        public float UdaljenostOdCentraGrada { get; set; }
+    }
+}
+

@@ -1,0 +1,38 @@
+.menu-container{
+  height:100%;
+  width:100%;
+  text-align: center;
+  padding: 4rem 1rem;
+  display:flex;
+  flex-direction:column;
+  gap: 3rem;
+}
+
+.navigation{
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 12px;
+  text-transform: uppercase;
+  font-weight: bold;
+  color:#3A3A3A;
+}
+
+.options{
+  display:flex;
+  flex-direction: column;
+  color:#3A3A3A;
+  align-items:flex-start;
+  margin-left: 3rem;
+}
+
+.sectionName{
+  font-size:16px;
+}
+
+@media screen and (min-width: 1000px) and (max-width: 1300px){
+  .options{
+    margin-left: 1.5rem;
+  }
+
+}

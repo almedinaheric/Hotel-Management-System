@@ -1,0 +1,26 @@
+<div class="wrapper spinnerWrapper" *ngIf="!dataLoaded">
+  <h4>Sobe se učitavaju, pričekajte trenutak!</h4>
+  <mat-spinner class="spinner" diameter="60"></mat-spinner>
+</div>
+
+<div class="wrapper" *ngIf="dataLoaded">
+  <ng-container *ngFor="let room of rooms">
+  <mat-card class="card">
+      <mat-card-title>{{ room.naziv }}</mat-card-title>
+      <mat-card-content id="cardContent">
+        <p>Kapacitet: <label id="numberOfRooms">{{ room.kapacitet }}</label></p>
+        <p>Cijena: <label id="price">{{ room.ukupnaCijena }}</label></p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button color="warn" (click)="Obrisi(room.id)">Obriši</button>
+      </mat-card-actions>
+  </mat-card>
+  </ng-container>
+</div>
+
+<div class="spinner-wrapper" *ngIf="brisanjeUToku">
+  <div class="spinner-container">
+    <mat-spinner diameter="80"></mat-spinner>
+    <h4>Brisanje je u toku molimo pricekajte...</h4>
+  </div>
+</div>

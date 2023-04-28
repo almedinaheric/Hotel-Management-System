@@ -1,0 +1,33 @@
+<mat-card class="pretraga-card">
+  <mat-card-content>
+    <div class="pretraga-form">
+      <div class="pretraga-form-group formGroup1">
+        <app-select-box id="grad" label="Odaberite grad" [passedArray]="gradovi" [NameOrId]="'name'" [formControlInput]="searchTerm"></app-select-box>
+        <mat-form-field appearance="fill" class="pretraga-date-field">
+          <mat-label>Odaberite datum</mat-label>
+          <mat-date-range-input [rangePicker]="picker">
+            <input [(ngModel)]="dateStart" matStartDate placeholder="Datum prijave">
+            <input [(ngModel)]="dateEnd" matEndDate placeholder="Datum odjave">
+          </mat-date-range-input>
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-date-range-picker #picker></mat-date-range-picker>
+        </mat-form-field>
+      </div>
+      <div class="pretraga-form-group">
+        <mat-form-field class="pretraga-guests-field">
+          <mat-label>Broj odraslih osoba</mat-label>
+          <input matInput type="number" placeholder="Broj gostiju" [(ngModel)]="numGuests" />
+        </mat-form-field>
+        <mat-form-field class="pretraga-children-field">
+          <mat-label>Broj djece</mat-label>
+          <input matInput type="number" placeholder="Do 5 godina" [(ngModel)]="numChildren"/>
+        </mat-form-field>
+        <mat-form-field class="pretraga-rooms-field">
+          <mat-label>Broj soba</mat-label>
+          <input matInput type="number" placeholder="Broj soba" [(ngModel)]="numRooms"/>
+        </mat-form-field>
+      </div>
+      <button mat-raised-button color="primary" class="pretraga-button" (click)="Search()">Pretraži</button>
+    </div>
+  </mat-card-content>
+</mat-card>

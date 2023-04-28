@@ -1,0 +1,12 @@
+<div class="wrapper">
+    <h1>Moj Profil</h1>
+    <app-input-field class="inputField" id="ime" label="Ime" [input]="formGroup.get('ime')"></app-input-field>
+    <app-input-field class="inputField" id="prezime" label="Prezime" [input]="formGroup.get('prezime')"></app-input-field>
+    <app-input-field class="inputField" id="email" label="Email" [input]="formGroup.get('email')"></app-input-field>
+    <app-input-field class="inputField" id="spol" label="Spol" [input]="formGroup.get('spol')"></app-input-field>
+    <app-choose-date class="inputField" id="datumRodjenja" label="Datum rodjenja" [input]="formGroup.get('datumRodjenja')"></app-choose-date>
+    <app-input-field class="inputField" id="brojTelefona" label="Broj telefona" [input]="formGroup.get('brojTelefona')"></app-input-field>
+    <app-input-field *ngIf="workingUser.korisnik.uloga=='Vlasnik'" class="inputField"  class="card-content-items username inputField" id="brojRacuna" [type]="'number'" label="Broj racuna" [input]="formGroup.get('brojRacuna')"></app-input-field>
+    <app-input-field *ngIf="workingUser.korisnik.uloga=='Vlasnik'" class="inputField" class="card-content-items username inputField" id="brojLicneKarte" [number]="9" label="Broj licne karte" [input]="formGroup.get('brojLicneKarte')"></app-input-field>
+    <button mat-raised-button id="urediButton" color="primary" (click)="SaveChanges()">{{ urediSpremi ? 'Uredi' : 'Spremi' }}</button>
+</div> 

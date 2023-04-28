@@ -1,0 +1,55 @@
+<div class="wrapper">
+    <app-navbar [putanja]="'landingPage'"></app-navbar>
+    <div class="wrapper-inner">
+        <div class="buttonNazad">
+            <button mat-button routerLink="/dashboard/mojiObjekti" (click)="ObrisiSessionStorage()">
+                <div class="navigation">
+                  <mat-icon>arrow_back</mat-icon>
+                  <span>Nazad na prethodnu stranicu</span>
+                </div>
+            </button>
+        </div>
+        <mat-card class="podaci">
+            <div class="opste">
+                <h2>Opšte informacije</h2>
+                <div class="content">
+                    <div class="leftOpste">
+                        <app-input-field class="inputField" id="nazivHotela" label="Naziv hotela" [input]="formData.get('naziv')" ></app-input-field>
+                        <div class="adresaGrad">
+                            <app-select-box id="grad" label="Grad" [passedArray]="gradovi" [NameOrId]="'id'" [formControlInput]="formData.controls.grad" ></app-select-box>
+                            <app-input-field class="inputField" id="adresa" label="Adresa" [input]="formData.get('adresa')" ></app-input-field>
+                        </div>
+                        <app-input-field class="inputField" id="email" label="Email" [input]="formData.get('emailHotela')" ></app-input-field>
+                        <app-input-field class="inputField" id="telefon" label="Broj telefona"  [type]="'tel'" [input]="formData.get('brojTelefona')"></app-input-field>
+                        <app-textarea [label]="'Opis'" [placeholder]="'Ovo je opis hotela...'" [input]="formData.get('opis')" ></app-textarea>
+                    </div>
+                    <div class="rightOpste">
+                        <app-upload-file [namjena]="'sliku hotela'"></app-upload-file>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="detalji">
+                <h2>Detalji hotela</h2>
+                <div class="leftDetalji">
+                        <app-input-field class="inputField" id="brojSpratiov" label="Broj spratova" [type]="'number'" [input]="formData.get('brojSpratova')"></app-input-field>
+                        <app-input-field class="inputField" id="brojJednoKr" label="Broj jednokrevetnih soba" [type]="'number'" [input]="formData.get('brojJednokrevetnihSoba')"></app-input-field>
+                        <app-input-field class="inputField" id="brojDvokr" label="Broj dvokrevetnih soba" [type]="'number'" [input]="formData.get('brojDvokrevetnihSoba')"></app-input-field>
+                        <app-input-field class="inputField" id="brojTorkr" label="Broj trokrevetnih soba"  [type]="'number'" [input]="formData.get('brojTrokrevetnihSoba')"></app-input-field>
+                        <div class="zvjezdiceUdaljenost">
+                            <app-input-field class="inputField" id="brojZvjezdica" [hint]="'1-5'" label="Broj zvjezdica"  [type]="'number'" [input]="formData.get('brojZvjezdica')"></app-input-field>
+                            <app-input-field class="inputField" id="udaljenost"  label="Udaljenost od centra grada (u km)"  [type]="'number'" [input]="formData.get('udaljenostOdCentraGrada')"></app-input-field>
+                        </div>
+                        <div class="vrijeme">
+                            <app-input-field class="inputField" id="vrijemeCheckIn" label="Vrijeme Check In-a"  [input]="formData.get('vrijemeCheckIna')" [type]="'time'"></app-input-field>
+                            <app-input-field class="inputField" id="vrijemeCheckOut" label="Vrijeme Check Out-a"  [input]="formData.get('vrijemeCheckOuta')" [type]="'time'"></app-input-field>
+                        </div>
+                    </div>
+            </div>
+        </mat-card>
+        <div class="buttons">
+            <button mat-raised-button id="odbaciButton" (click)="Odbaci()">Odbaci promjene</button>
+            <button mat-raised-button id="urediButton" color="primary" (click)="SaveChanges()">Spremi promjene</button>
+        </div>
+    </div>
+</div>

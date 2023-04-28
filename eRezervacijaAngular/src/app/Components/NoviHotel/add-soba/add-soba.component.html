@@ -1,0 +1,19 @@
+<div class="wrapper">
+    <h2>{{title}}</h2>
+    <hr>
+    <div class="content">
+        <ng-container *ngIf="currentIndex == 0">
+            <app-dodaj-sobu></app-dodaj-sobu>
+        </ng-container>
+        <ng-container *ngIf="currentIndex == 1">
+            <app-room-amenities></app-room-amenities>
+        </ng-container>
+        <ng-container *ngIf="currentIndex == 2">
+            <app-dodaj-slike></app-dodaj-slike>
+        </ng-container>
+    </div>
+    <div class="commandButtons">
+        <button mat-raised-button  (click)="onBack()" color="primary">Nazad</button>
+        <button mat-raised-button  (click)="onNext()" color="primary">{{contentDalje}}</button>        
+    </div>
+</div>

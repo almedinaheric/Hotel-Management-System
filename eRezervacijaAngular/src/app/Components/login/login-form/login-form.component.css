@@ -1,0 +1,68 @@
+.card {
+  background-color: #f8f8f8;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-header {
+  width: 100%;
+  padding: 24px 0 16px 0;
+  background-color: var(--material-ui-primary);
+  color: var(--white);
+  display: flex;
+  justify-content: center;
+  border-radius: 5px 5px 0 0;
+}
+
+.card-title {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.card-subtitle {
+  font-size: small;
+  color: #e5e3e3
+}
+
+.card-content {
+  padding: 48px !important;
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  align-items: center;
+  justify-content: center;
+}
+.card-content-items{
+  width: 100%;
+}
+
+.username, .password{
+  margin-bottom: 16px;
+}
+
+.login-button {
+  display: flex;
+  justify-content: center;
+  width: 60%;
+  margin:24px 0 16px 0;
+}
+
+.register-link {
+  display: flex;
+  justify-content: center;
+}
+
+a {
+  text-decoration: none;
+  color: #2196f3;
+}
+.close{
+  position: absolute;
+  left: 0.2rem;
+  top: 0.2rem;
+}
+  

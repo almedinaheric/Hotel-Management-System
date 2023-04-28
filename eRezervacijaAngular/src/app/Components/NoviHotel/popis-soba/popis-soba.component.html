@@ -1,0 +1,11 @@
+<div class="content">
+    <div class="dodaneSobe">        
+        <div class="sveSobe">
+            <app-dodane-sobe></app-dodane-sobe>
+        </div>
+        <h4 *ngIf="postoji==false">Još uvijek nema dodanih soba. Dodajte sobu!</h4>
+    </div>
+    <button mat-stroked-button color="primary" class="add-room-button"  (click)="dodajSobu()">
+        <mat-icon class="button-icon">add</mat-icon>Dodaj sobu
+    </button>
+</div>

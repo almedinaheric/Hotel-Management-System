@@ -1,0 +1,19 @@
+<div class="content">
+    <div class="left">
+        <app-input-field class="inputField" id="brojSpratiov" label="Broj spratova" [input]="detaljiInfoForm.get('brojSpratova')" [type]="'number'"></app-input-field>
+        <app-input-field class="inputField" id="brojJednoKr" label="Broj jednokrevetnih soba" [input]="detaljiInfoForm.get('brojJednokrevetnihSoba')" [type]="'number'"></app-input-field>
+        <app-input-field class="inputField" id="brojDvokr" label="Broj dvokrevetnih soba" [input]="detaljiInfoForm.get('brojDvokrevetnihSoba')"[type]="'number'"></app-input-field>
+        <app-input-field class="inputField" id="brojTorkr" label="Broj trokrevetnih soba" [input]="detaljiInfoForm.get('brojTrokrevetnihSoba')" [type]="'number'"></app-input-field>
+        <div class="zvjezdiceUdaljenost">
+            <app-input-field class="inputField" id="brojZvjezdica" [hint]="'1-5'" label="Broj zvjezdica" [input]="detaljiInfoForm.get('brojZvjezdica')" [type]="'number'"></app-input-field>
+            <app-input-field class="inputField" id="udaljenost"  label="Udaljenost od centra grada (u km)" [input]="detaljiInfoForm.get('udaljenost')" [type]="'number'"></app-input-field>
+        </div>
+        <div class="vrijeme">
+            <app-input-field class="inputField" id="vrijemeCheckIn" label="Vrijeme Check In-a" [input]="detaljiInfoForm.get('vrijemeCheckIna')" [type]="'time'"></app-input-field>
+            <app-input-field class="inputField" id="vrijemeCheckOut" label="Vrijeme Check Out-a" [input]="detaljiInfoForm.get('vrijemeCheckOuta')" [type]="'time'"></app-input-field>
+        </div>
+    </div>
+    <div class="right">
+        <app-hotel-amenities></app-hotel-amenities>
+    </div>
+</div>

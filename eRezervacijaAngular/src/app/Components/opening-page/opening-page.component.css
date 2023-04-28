@@ -1,0 +1,31 @@
+.wrapper {
+    width: 100%;
+    height: 100%;
+    background-color: var(--white-smoke);
+}
+
+.heading-div{
+    width: 100%;
+    height: 35%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--material-ui-primary);
+    color: #e8e8e8;
+}
+
+.heading-div h1{
+    font-weight: 800;
+    font-size: 48px;
+}
+
+.VlasnikOrGost{
+    width: 100%;
+    height: 65%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.loginRegistration{
+    width: 50%;
+}

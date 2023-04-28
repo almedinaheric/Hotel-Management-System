@@ -1,0 +1,10 @@
+<div class="wrapper">
+    <h1>Moji Objekti</h1>
+    <div class="dodaniObjekti">        
+        <div class="sviObjekti">
+            <app-popis-hotela (postojiHotel)="DaLiHotelPostoji($event)"></app-popis-hotela>
+        </div>
+        <h4 *ngIf="postojiHotel==false">Još uvijek nemate dodanih objekata. Dodajte objekat!</h4>
+    </div>
+    <button mat-raised-button class="buttonDodaj" color="primary" (click)="toAddHotel()">Dodaj hotel</button>
+</div>

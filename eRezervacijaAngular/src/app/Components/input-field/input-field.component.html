@@ -1,0 +1,6 @@
+<mat-form-field appearance="fill" class="inputField" id="{{id}}">
+  <mat-label>{{label}}</mat-label>
+  <input matInput placeholder="{{label}}" [formControl]="input" [attr.maxlength]="number" type="{{type}}">
+  <mat-error *ngIf="input.invalid">{{getErrorMessage()}}</mat-error>
+  <mat-hint *ngIf="hint">{{hint}}</mat-hint>
+</mat-form-field>

@@ -1,0 +1,24 @@
+.content{
+    display: flex;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.left{
+    width: 50%;
+    padding-right: 1rem;
+    border-right: 1px solid var(--silver);
+}
+
+.right{
+    width: 50%;
+}
+
+.adresaGrad{
+    display: flex; 
+    gap: 1rem;
+}
+
+#adresa,#grad{
+    width: 50%;
+}

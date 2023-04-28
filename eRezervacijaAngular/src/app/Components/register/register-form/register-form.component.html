@@ -1,0 +1,38 @@
+<mat-card class="card">
+    <mat-card-header class="card-header">
+      <button mat-icon-button class="close" routerLink="/">
+        <mat-icon>close</mat-icon>
+      </button>
+      <mat-card-title class="card-title">Sign Up</mat-card-title>
+      <mat-card-subtitle class="card-subtitle">as hotel {{OwnerGuest}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content class="main-card-content">
+      <mat-card-content class="card-content" id="personal-informations" [style.width]="OwnerGuest=='owner'?'30%':'45%'">
+          <app-input-field id="ime" label="Ime" [input]="ime"></app-input-field>
+          <app-input-field id="prezime" label="Prezime" [input]="prezime"></app-input-field>
+          <app-input-field id="email" label="Email" [input]="email"></app-input-field>
+          <app-choose-date id="datumRodjenja" label="Datum rodjenja" [input]="datumRodjenja"></app-choose-date>
+          <mat-radio-group aria-label="Spol:" class="radioForm" [(ngModel)]="odabraniSpol">
+            <label style="margin-right: 16px;">Spol:</label>
+            <mat-radio-button value="Muski">Muško</mat-radio-button>
+            <mat-radio-button value="Zenski">Žensko</mat-radio-button>
+          </mat-radio-group>
+          <app-input-field id="brojTelefona" label="Broj telefona" [type]="'number'" [input]="brojTelefona"></app-input-field>
+      </mat-card-content>
+      <mat-card-content class="card-content" id="login-informations" [style.width]="OwnerGuest=='owner'?'30%':'45%'" [style.border-right]="OwnerGuest=='guest'?'none':'1px solid var(--silver)'">
+          <app-input-field id="username" label="Username" [input]=username></app-input-field>
+          <app-password-field  id="password1" label="Password" [password]=password></app-password-field>
+          <app-password-field id="password2" label="Password" [password]=confirmedPassword></app-password-field>
+      </mat-card-content>
+      <mat-card-content class="card-content" id="hotel-owner-informations" *ngIf="'showHotelOwnerInfo'" [style.display]="OwnerGuest=='guest'||'admin'? 'none':'block'" [style.width]="OwnerGuest == 'guest' ? '0' : '30%'">
+          <app-input-field class="card-content-items username" [type]="'number'" id="brojRacuna" [hint]="'Unesite 16 cifara'" [number]="16" label="Broj racuna" [input]=brojRacuna></app-input-field>
+          <app-input-field class="card-content-items username" id="brojLicneKarte" [number]="9" label="Broj licne karte" [input]=brojLicneKarte></app-input-field>
+      </mat-card-content>
+    </mat-card-content>
+    <mat-card-actions class="card-footer">
+      <button class="register-button card-content-items" mat-raised-button color="primary" (click)="Registracija()">Sign Up</button>
+      <a class="login-link" *ngIf="OwnerGuest=='owner'" [routerLink]="['/loginVlasnik']">Already have an account? Log In!</a>
+      <a class="login-link" *ngIf="OwnerGuest=='guest'" [routerLink]="['/loginGost']">Already have an account? Log In!</a>
+      <a class="login-link" *ngIf="OwnerGuest=='admin'" [routerLink]="['/loginAdmin']">Already have an account? Log in!</a>
+    </mat-card-actions>
+</mat-card>

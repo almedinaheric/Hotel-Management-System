@@ -1,0 +1,43 @@
+.wrapper{
+    border: 1px solid var(--silver);
+    border-radius: 4px;
+    padding: 1rem;
+    height: 14rem;
+    width: 20rem;
+}
+
+h4{
+    margin: 0;
+}
+
+.korisnik,.ocjena,.comment{
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+
+.korisnik{
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--silver);
+}
+
+.korisnik mat-icon{
+    color: var(--material-ui-primary);
+}
+
+.ocjena mat-icon{
+    color: var(--khaki);
+}
+
+.ocjena{
+    padding: 1rem 0 1rem 0;
+}
+
+#komentar{
+    text-align: justify;
+    height: fit-content;
+    overflow: hidden;
+    white-space: normal;
+}
+

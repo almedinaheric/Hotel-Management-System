@@ -1,0 +1,42 @@
+.wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+    background-color: var(--gainsboro);
+    border: 1px solid #696969;
+    text-align: center;
+}
+
+.wrapper:hover{
+    background-color:var(--white-smoke);
+}
+
+.wrapper-content{
+    width: fit-content;
+}
+
+.wrapper button{
+    width: 40%;
+}
+
+.wrapper h1{
+    font-weight: 700;
+    margin-bottom: 3rem;
+}
+
+.loginBtn{
+    margin-bottom: 1.5rem;
+    padding: 24px;
+    font-size: 1rem;
+}
+
+a{
+    text-decoration: none;
+    color: var(--material-ui-primary);
+}
+
+h1,label{
+    color: #3c3c3c;
+}

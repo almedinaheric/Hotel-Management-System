@@ -1,0 +1,115 @@
+.navigation{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: bold;
+    color:#3A3A3A;
+}
+
+.wrapper{
+    background-color: var(--gainsboro);
+}
+
+.buttonNazad{
+    width: 100%;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--silver);
+    margin-bottom: 1rem;
+}
+
+.wrapper-inner{
+    width: 80%;
+    height: fit-content;
+    margin: 0 auto;
+    padding: 2rem 1rem 0rem 1rem;
+}
+
+.podaci{
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.podaci h2{
+    font-weight: bold;
+    color: #3A3A3A;
+    width: 100%;
+    padding: 0.5rem 0rem 1rem 1rem;
+    border-bottom: 1px solid var(--silver);
+}
+
+.opste{
+    padding-bottom: 2rem;
+}
+
+.detalji{
+    padding: 1rem 0rem 1rem 0rem;
+    margin-top: 0.5rem;
+}
+
+#urediButton{
+    margin-bottom: 2rem;
+    width: 70%;
+}
+
+#odbaciButton{
+    margin-bottom: 2rem;
+    width: 30%;
+}
+
+.buttons{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.content{
+    display: flex;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.leftOpste{
+    width: 50%;
+    padding-right: 1rem;
+    border-right: 1px solid var(--silver);
+}
+
+.rightOpste{
+    width: 50%;
+}
+
+.adresaGrad{
+    display: flex; 
+    gap: 1rem;
+}
+
+#adresa,#grad{
+    width: 50%;
+}
+
+.leftDetalji{
+    width: 100%;
+}
+
+.vrijeme {
+    display: flex;
+    gap: 1rem;
+    width: 100%;
+}
+
+#vrijemeCheckIn,#vrijemeCheckOut {width: 50%;}
+
+.zvjezdiceUdaljenost{
+    display: flex;
+    gap: 1rem;
+}
+
+#brojZvjezdica,#udaljenost{
+    width: 50%;
+}
+
+

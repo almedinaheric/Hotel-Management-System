@@ -1,0 +1,22 @@
+.content{
+    padding:2rem 1rem 2rem 1rem ;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.add-room-button{
+    margin: auto;
+    margin-top: 2rem;
+    padding: 1rem 2rem 1rem 2rem;
+}
+
+.content h4{
+    width: fit-content;
+    margin: auto;
+}
+
+.sveSobe{
+    max-height: 20rem;
+    overflow-y: scroll;
+}

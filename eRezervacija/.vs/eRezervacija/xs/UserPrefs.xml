@@ -1,0 +1,29 @@
+﻿<Properties StartupConfiguration="{700159C4-25FA-4052-B82F-F838F59BDF2E}|Default">
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.ItemProperties.eRezervacija.API PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="eRezervacija.API/Program.cs">
+    <Files>
+      <File FileName="eRezervacija.API/Program.cs" Line="63" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="eRezervacija" expanded="True">
+            <Node name="eRezervacija.API" expanded="True">
+              <Node name="Dependencies" selected="True" />
+              <Node name="Controllers" expanded="True" />
+            </Node>
+            <Node name="eRezervacija.Core" expanded="True" />
+            <Node name="eRezervacija.Repository" expanded="True" />
+            <Node name="eRezervacija.Service" expanded="True" />
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MultiItemStartupConfigurations />
+</Properties>

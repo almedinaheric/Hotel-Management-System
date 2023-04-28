@@ -1,0 +1,19 @@
+<div class="content">
+    <div class="left">
+        <app-input-field id="naziv" [label]="'Naziv sobe'" [input]="opsteInfoSoba.get('nazivSobe')" ></app-input-field>
+        <app-textarea [label]="'Opis'" [placeholder]="'Ovo je opis sobe...'" [input]="opsteInfoSoba.get('opisSobe')"></app-textarea>
+        <app-input-field id="brojIstih" [label]="'Broj soba (ovakvog tipa)'" [input]="opsteInfoSoba.get('brojIstihSoba')" [type]="'number'"></app-input-field>
+    </div>
+    <div class="right">
+        <app-input-field id="kapacitet" [label]="'Kapacitet osoba'" [type]="'number'" [input]="opsteInfoSoba.get('kapacitet')" ></app-input-field>
+        <app-input-field id="brojKrevetaZaJednuOsobu" [label]="'Broj kreveta za jednu osobu'" [type]="'number'" [input]="opsteInfoSoba.get('brojKrevetaZaJednuOsobu')" ></app-input-field>
+        <app-input-field id="brojKrevetaNaSprat" [label]="'Broj kreveta na sprat'" [type]="'number'" [input]="opsteInfoSoba.get('brojKrevetaNaSprat')" ></app-input-field>
+        <app-input-field id="brojBracnihKreveta" [label]="'Broj bračnih kreveta'" [type]="'number'" [input]="opsteInfoSoba.get('brojBracnihKreveta')" ></app-input-field>
+        <mat-checkbox id="dodavanjeKreveta" [formControl]="opsteInfoSoba.get('mogucnostDodavanjaDjecijegKreveta')">Mogućnost dodavanja dječijeg kreveta</mat-checkbox>
+        <div class="ukupnaCijena">
+            <app-input-field id="ukupnaCijena" [label]="'Ukupna cijena u KM (za jednu noć)'" [type]="'number'" [input]="opsteInfoSoba.get('ukupnaCijena')" ></app-input-field>
+        </div>  
+    </div>
+</div>
+
+  

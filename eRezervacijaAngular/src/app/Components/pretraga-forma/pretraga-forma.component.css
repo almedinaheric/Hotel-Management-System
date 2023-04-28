@@ -1,0 +1,49 @@
+.pretraga-card {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.5rem 3rem 0.5rem 3rem;
+  border-radius: 8px;
+  margin: auto;
+}
+
+.pretraga-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.pretraga-form-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+.formGroup1{
+  gap: 1rem;
+}
+
+#grad{
+  flex: 2;
+}
+
+.pretraga-date-field{
+  flex: 2;
+}
+
+.pretraga-rooms-field  {
+  flex: 1;
+}
+
+.pretraga-guests-field, .pretraga-children-field {
+  flex: 1;
+  margin-right: 16px;
+}
+
+.pretraga-button {
+  width: 50%;
+  align-self: center;
+}

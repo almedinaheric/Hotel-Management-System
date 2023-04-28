@@ -1,0 +1,22 @@
+<div class="wrapper">
+  <mat-checkbox [formControl]="allCheckboxes" (change)="toggleAllCheckboxes()">
+    <label id="selectAll">Označi sve</label>
+  </mat-checkbox>
+  <div class="content">
+    <div class="content-inner">
+      <form [formGroup]="myForm" class="column">
+        <mat-checkbox *ngFor="let checkBox of checkBoxesDiv1" (change)="saveToSessionStorage()" [formControl]="checkBox.control">{{ checkBox.label }}</mat-checkbox>
+      </form>
+    </div>
+    <div class="content-inner">
+      <form [formGroup]="myForm" class="column">
+        <mat-checkbox *ngFor="let checkBox of checkBoxesDiv2" (change)="saveToSessionStorage()" [formControl]="checkBox.control">{{ checkBox.label }}</mat-checkbox>
+      </form>
+    </div>
+    <div class="content-inner">
+      <form [formGroup]="myForm" class="column">
+        <mat-checkbox *ngFor="let checkBox of checkBoxesDiv3" (change)="saveToSessionStorage()" [formControl]="checkBox.control">{{ checkBox.label }}</mat-checkbox>
+      </form>
+    </div>
+  </div>
+</div>

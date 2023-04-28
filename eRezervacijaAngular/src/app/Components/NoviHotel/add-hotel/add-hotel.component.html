@@ -1,0 +1,19 @@
+<div class="wrapper">
+    <h2>{{title}}</h2>
+    <hr>
+    <div class="content">
+        <ng-container *ngIf="currentIndex == 0">
+            <app-opste-informacije></app-opste-informacije>
+        </ng-container>
+        <ng-container *ngIf="currentIndex == 1">
+            <app-hotel-detalji></app-hotel-detalji>
+        </ng-container>
+        <ng-container *ngIf="currentIndex == 2">
+            <app-popis-soba (postojiSoba)="DaLiPostojiSoba($event)"></app-popis-soba>
+        </ng-container>
+    </div>
+    <div class="commandButtons">
+        <button mat-raised-button [disabled]="currentIndex == 0" (click)="onBack()" color="primary">Nazad</button>
+        <button mat-raised-button [disabled]="currentIndex==2 && postojiSoba==false"  (click)="onNext()" color="primary">{{contentDalje}}</button>        
+    </div>
+</div>

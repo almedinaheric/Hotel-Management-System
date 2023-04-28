@@ -1,0 +1,28 @@
+.content{
+    display: flex;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.left{
+    width: 50%;
+    padding-right: 2rem;
+    border-right: 1px solid var(--silver);
+}
+
+.right{
+    width: 50%;
+}
+
+.brojIstih{
+    width: 30%;
+}
+
+#dodavanjeKreveta{
+    margin-bottom: 1rem;
+}
+
+.ukupnaCijena{
+    padding-top: 1rem;
+    border-top: 1px solid var(--silver);
+}

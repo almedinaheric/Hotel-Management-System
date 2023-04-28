@@ -1,0 +1,24 @@
+.wrapper{
+    padding: 2rem;
+}
+
+.content{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.content-inner{
+    width: 25%;
+}
+
+.column{
+    display: flex;
+    flex-direction: column;
+}
+
+#selectAll{
+    font-weight: 600;
+    font-size: 1rem;
+}

@@ -1,0 +1,61 @@
+body{
+  height: fit-content;
+}
+
+.wrapper{
+  width: 100%;
+  height: fit-content;
+  position: relative;
+  background-color: var(--gainsboro);
+}
+
+#landingPageImg{
+  height: 45%;
+  width:100%;
+  opacity:90%;
+}
+
+.wrapper-form{
+  width: 70%;
+  margin: -10rem auto 0 auto;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height:fit-content;
+}
+
+#pretraga-form {
+  margin-bottom: 3rem;
+}
+
+h1{
+  color: var(--grey);
+  font-weight: 500;
+}
+
+.destinacije{
+  margin-bottom: 3rem;
+}
+
+.hoteli,.destinacije,.postaviPitanje{
+  width: 90%;
+}
+
+#forma{
+  width:100%
+}
+
+textarea{
+  width: 100%;
+}
+
+.postaviPitanje{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 4rem;
+}
+
+.postaviPitanje button{
+  width: 40%;
+}

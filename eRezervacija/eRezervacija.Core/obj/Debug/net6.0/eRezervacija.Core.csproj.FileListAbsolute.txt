@@ -1,0 +1,14 @@
+/Users/almedinaheric/Desktop/webapp/eRezervacija/eRezervacija.Core/bin/Debug/net6.0/eRezervacija.Core.deps.json
+/Users/almedinaheric/Desktop/webapp/eRezervacija/eRezervacija.Core/bin/Debug/net6.0/eRezervacija.Core.runtimeconfig.json
+/Users/almedinaheric/Desktop/webapp/eRezervacija/eRezervacija.Core/bin/Debug/net6.0/eRezervacija.Core.dll
+/Users/almedinaheric/Desktop/webapp/eRezervacija/eRezervacija.Core/bin/Debug/net6.0/eRezervacija.Core.pdb
+/Users/almedinaheric/Desktop/webapp/eRezervacija/eRezervacija.Core/obj/Debug/net6.0/eRezervacija.Core.csproj.AssemblyReference.cache
+/Users/almedinaheric/Desktop/webapp/eRezervacija/eRezervacija.Core/obj/Debug/net6.0/eRezervacija.Core.GeneratedMSBuildEditorConfig.editorconfig
+/Users/almedinaheric/Desktop/webapp/eRezervacija/eRezervacija.Core/obj/Debug/net6.0/eRezervacija.Core.AssemblyInfoInputs.cache
+/Users/almedinaheric/Desktop/webapp/eRezervacija/eRezervacija.Core/obj/Debug/net6.0/eRezervacija.Core.AssemblyInfo.cs
+/Users/almedinaheric/Desktop/webapp/eRezervacija/eRezervacija.Core/obj/Debug/net6.0/eRezervacija.Core.csproj.CoreCompileInputs.cache
+/Users/almedinaheric/Desktop/webapp/eRezervacija/eRezervacija.Core/obj/Debug/net6.0/eRezervacija.Core.dll
+/Users/almedinaheric/Desktop/webapp/eRezervacija/eRezervacija.Core/obj/Debug/net6.0/refint/eRezervacija.Core.dll
+/Users/almedinaheric/Desktop/webapp/eRezervacija/eRezervacija.Core/obj/Debug/net6.0/eRezervacija.Core.pdb
+/Users/almedinaheric/Desktop/webapp/eRezervacija/eRezervacija.Core/obj/Debug/net6.0/eRezervacija.Core.genruntimeconfig.cache
+/Users/almedinaheric/Desktop/webapp/eRezervacija/eRezervacija.Core/obj/Debug/net6.0/ref/eRezervacija.Core.dll

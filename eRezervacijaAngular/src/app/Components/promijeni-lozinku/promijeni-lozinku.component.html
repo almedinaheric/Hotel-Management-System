@@ -1,0 +1,9 @@
+<div class="wrapper">
+    <h1>Promijeni Lozinku</h1>
+    <div class="content">
+        <app-password-field label="Trenutni password" [password]="passwordi.get('trenutniPassword')"></app-password-field>
+        <app-password-field label="Novi password" [password]="passwordi.get('noviPassword')"></app-password-field>
+        <app-password-field label="Potvrda password" [password]="passwordi.get('potvrdaPassword')"></app-password-field>
+        <button mat-raised-button color="primary" (click)="ChangePassword()">Potvrdi</button>
+    </div>
+</div>

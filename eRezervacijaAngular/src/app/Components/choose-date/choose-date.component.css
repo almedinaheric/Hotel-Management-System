@@ -1,0 +1,8 @@
+.inputField{
+    width: 100%;
+}
+
+.inputField input:disabled{
+    color:  var(--material-ui-primary);
+  }
+  

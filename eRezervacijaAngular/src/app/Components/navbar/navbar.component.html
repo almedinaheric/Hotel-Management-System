@@ -1,0 +1,16 @@
+<mat-toolbar color="primary" id="wrapper">
+  <mat-toolbar-row class="navbarContent">
+    <a href="{{putanja}}" id="bookspan">Booking</a>
+    <div class="accountNavBar">
+      <span id="imeprez">{{workingUser.korisnik.ime}} {{workingUser.korisnik.prezime}}</span>
+      <span [matMenuTriggerFor]="menu" class="material-symbols-outlined" id="accountBtn">account_circle</span>
+    </div>
+    <mat-menu #menu yPosition="above" xPosition="before" class="navbar-menu">
+      <button class="menu-item" mat-menu-item (click)="NaProfil()">Profil</button>
+      <button class="menu-item" mat-menu-item *ngIf="workingUser.korisnik.uloga === 'Vlasnik' " (click)="DodajHotel()">Dodaj objekat</button>
+      <button class="menu-item" mat-menu-item (click)="Logout()">Log out</button>
+    </mat-menu>
+  </mat-toolbar-row>
+</mat-toolbar>
+  
+  

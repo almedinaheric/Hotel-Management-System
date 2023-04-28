@@ -1,0 +1,28 @@
+<div class="wrapper spinnerWrapper" *ngIf="!dataLoaded">
+  <h4>Objekti se učitavaju, pričekajte trenutak!</h4>
+  <mat-spinner class="spinner" diameter="60"></mat-spinner>
+</div>
+
+<ng-container *ngFor="let hotel of hotels">
+  <mat-card class="card">
+      <mat-card-title>{{ hotel.naziv }}</mat-card-title>
+      <mat-card-subtitle id="unlisted" *ngIf="hotel.unlisted==true">Hotel još uvijek nije odobren i trenutno se ne prikazuje prilikom pretrage!</mat-card-subtitle>
+      <mat-card-content>
+        <div id="content">
+          <p id="opisHotela">{{ hotel.opis.split(' ').splice(0,100).join(' ') + '...' }}</p>
+          <img id="slikaHotela" src="{{getSlika(hotel)}}" alt="{{hotel.naziv}}">
+        </div>
+        <div id="buttons">
+          <button mat-button color="warn" (click)="Obrisi(hotel.id)">Obriši</button>
+          <button mat-button color="primary" (click)="Uredi(hotel)">Uredi</button>
+        </div>
+      </mat-card-content>
+  </mat-card>
+</ng-container>
+
+<div class="spinner-wrapper" *ngIf="brisanjeUToku">
+  <div class="spinner-container">
+    <mat-spinner diameter="80"></mat-spinner>
+    <h4>Brisanje je u toku molimo pricekajte...</h4>
+  </div>
+</div>

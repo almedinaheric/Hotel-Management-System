@@ -1,0 +1,17 @@
+/Users/almedinaheric/Desktop/webapp/eRezervacija/eRezervacija.Repository/bin/Debug/net6.0/eRezervacija.Repository.deps.json
+/Users/almedinaheric/Desktop/webapp/eRezervacija/eRezervacija.Repository/bin/Debug/net6.0/eRezervacija.Repository.runtimeconfig.json
+/Users/almedinaheric/Desktop/webapp/eRezervacija/eRezervacija.Repository/bin/Debug/net6.0/eRezervacija.Repository.dll
+/Users/almedinaheric/Desktop/webapp/eRezervacija/eRezervacija.Repository/bin/Debug/net6.0/eRezervacija.Repository.pdb
+/Users/almedinaheric/Desktop/webapp/eRezervacija/eRezervacija.Repository/bin/Debug/net6.0/eRezervacija.Core.dll
+/Users/almedinaheric/Desktop/webapp/eRezervacija/eRezervacija.Repository/bin/Debug/net6.0/eRezervacija.Core.pdb
+/Users/almedinaheric/Desktop/webapp/eRezervacija/eRezervacija.Repository/obj/Debug/net6.0/eRezervacija.Repository.csproj.AssemblyReference.cache
+/Users/almedinaheric/Desktop/webapp/eRezervacija/eRezervacija.Repository/obj/Debug/net6.0/eRezervacija.Repository.GeneratedMSBuildEditorConfig.editorconfig
+/Users/almedinaheric/Desktop/webapp/eRezervacija/eRezervacija.Repository/obj/Debug/net6.0/eRezervacija.Repository.AssemblyInfoInputs.cache
+/Users/almedinaheric/Desktop/webapp/eRezervacija/eRezervacija.Repository/obj/Debug/net6.0/eRezervacija.Repository.AssemblyInfo.cs
+/Users/almedinaheric/Desktop/webapp/eRezervacija/eRezervacija.Repository/obj/Debug/net6.0/eRezervacija.Repository.csproj.CoreCompileInputs.cache
+/Users/almedinaheric/Desktop/webapp/eRezervacija/eRezervacija.Repository/obj/Debug/net6.0/eRezervacija.Repository.csproj.CopyComplete
+/Users/almedinaheric/Desktop/webapp/eRezervacija/eRezervacija.Repository/obj/Debug/net6.0/eRezervacija.Repository.dll
+/Users/almedinaheric/Desktop/webapp/eRezervacija/eRezervacija.Repository/obj/Debug/net6.0/refint/eRezervacija.Repository.dll
+/Users/almedinaheric/Desktop/webapp/eRezervacija/eRezervacija.Repository/obj/Debug/net6.0/eRezervacija.Repository.pdb
+/Users/almedinaheric/Desktop/webapp/eRezervacija/eRezervacija.Repository/obj/Debug/net6.0/eRezervacija.Repository.genruntimeconfig.cache
+/Users/almedinaheric/Desktop/webapp/eRezervacija/eRezervacija.Repository/obj/Debug/net6.0/ref/eRezervacija.Repository.dll

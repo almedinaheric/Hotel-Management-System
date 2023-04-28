@@ -1,0 +1,37 @@
+.content{
+    display: flex;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.left{
+    width: 60%;
+    border-right: 1px solid var(--silver);
+    padding-right: 2rem;
+
+}
+
+.right{
+    width: 40%;
+    padding-left: 1rem;
+}
+
+.vrijeme {
+    display: flex;
+    gap: 1rem;
+    width: 100%;
+}
+
+#vrijemeCheckIn,#vrijemeCheckOut {width: 50%;}
+
+
+.zvjezdiceUdaljenost{
+    display: flex;
+    gap: 1rem;
+}
+
+#brojZvjezdica,#udaljenost{
+    width: 50%;
+}
+
+

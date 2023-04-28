@@ -1,0 +1,24 @@
+.wrapper{
+  width: 80%;
+  margin: auto ;
+  margin-top: 4rem;
+}
+
+h1{
+  font-weight: 600;
+  margin-bottom: 2rem;
+}
+
+#forma{
+  width:100%
+}
+
+textarea{
+  width: 100%;
+}
+
+.tableDiv{
+  max-height: 45rem;
+  overflow-y:auto;
+  padding: 1rem;
+}
