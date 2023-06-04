@@ -1,0 +1,39 @@
+<mat-card class="card">
+  <mat-card-header class="card-header">
+      <mat-card-title class="card-title">{{'PregledRezervacije'|transloco}}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="podaci">
+      <div class="podaciKorisnika">
+        <h4 id="naslovh4">{{'VasiPODACI'|transloco}}</h4>
+        <h4>{{'ImePrezime'|transloco}}<p>{{korisnik.korisnik.ime}} {{korisnik.korisnik.prezime}}</p></h4>
+        <h4>{{'BrTelefona'|transloco}}<p>{{korisnik.korisnik.broj_telefona}}</p></h4>
+        <h4>Email: <p>{{korisnik.korisnik.email}}</p></h4>
+      </div>
+      <div class="gradHotel">
+        <h4 id="naslovh4">{{'PodaciOHotelu'|transloco}}</h4>
+        <h4>{{'NazHotela'|transloco}}<p>{{hotel?.naziv}}</p></h4>
+        <h4>{{'Grad'|transloco}}<p>{{grad}}</p></h4>
+        <h4>{{'Adresa'|transloco}}<p>{{hotel?.adresa}}</p></h4>
+        <h4>{{'BrTelefona'|transloco}}<p>{{hotel?.brojTelefona}}</p></h4>
+        <h4>Email: <p>{{hotel?.emailHotela}}</p></h4>
+      </div>
+      <div class="brojGostijuSoba">
+        <h4 id="naslovh4">{{'PodaciORezervaciji'|transloco}}</h4>
+        <h4>{{'BrGostiju'|transloco}}<p>{{brojGostiju}}</p></h4>
+        <h4> {{'BrOdraslihOsoba'|transloco}}<p>{{brojOdraslih}}</p></h4>
+        <h4>{{'BrDjeceDo5God'|transloco}}<p>{{brojDjece}}</p></h4>
+        <h4>{{'BrSoba'|transloco}}<p>{{brojSoba}}</p></h4>
+        <h4>{{'ChIn'|transloco}}<p>{{datumCheckIn}}</p></h4>
+        <h4> {{'ChOut'|transloco}}<p>{{datumCheckOut}}</p></h4>
+        <h4> {{'DatumRez'|transloco}}<p>{{datetimenow}}</p></h4>
+        <h4>{{'UkupnaCijena'|transloco}}<p id="cijena">{{ukupnaCijena}}KM</p></h4>
+      </div>
+    </div>
+  </mat-card-content>
+  <mat-card-actions class="actions">
+      <button mat-raised-button color="primary" (click)="goBack()">{{'Odustani'|transloco}}</button>
+      <button mat-raised-button color="primary" routerLink="/rezervacija/1">{{'IdiNaPlacanje'|transloco}}</button>
+  </mat-card-actions>
+
+</mat-card>

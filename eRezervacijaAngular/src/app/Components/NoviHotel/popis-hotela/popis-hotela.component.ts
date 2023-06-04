@@ -35,7 +35,6 @@ export class PopisHotelaComponent {
     if(confirm('Jeste li sigurni da zelite izbrisati hotel?')==true){
       this.brisanjeUToku=true;
       this.httpklijent.delete(MojConfig.adresa_servera+'/api/Hotel/DeleteHotelById/'+hotelId,MojConfig.http_opcije()).subscribe((x:any)=>{
-        console.log("obrisani hotel ", x);
         location.reload();
         this.brisanjeUToku=false;
       });

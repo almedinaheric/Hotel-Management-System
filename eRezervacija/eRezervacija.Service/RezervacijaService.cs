@@ -1,4 +1,5 @@
-﻿using eRezervacija.Core;
+﻿using eRezervacija.API.ViewModels;
+using eRezervacija.Core;
 using eRezervacija.Core.ViewModels;
 using eRezervacija.Repository;
 using Microsoft.AspNetCore.Mvc;
@@ -10,7 +11,8 @@ namespace eRezervacija.Service
 {
 	public interface IRezervacijaService
 	{
-		void Add(Rezervacija obj);
+		Rezervacija Add(RezervacijaAddVM obj);
+		void UpdateCijenu(int id, float cijena);
 		IEnumerable<Rezervacija> GetAll();
 		IEnumerable<RezervacijaReturnVM> GetByGostId(int gostId);
         IEnumerable<RezervacijaReturnVM> GetByVlasnikHotelaId(int vlasnikId);
@@ -28,9 +30,23 @@ namespace eRezervacija.Service
 			this.sobaService = sobaService;
 			this.hotelService = hotelService;
 		}
-		public void Add(Rezervacija obj)
+		public Rezervacija Add(RezervacijaAddVM rezervacija)
 		{
-			rezervacijaRepository.Add(obj);
+			var novaRezervacija = new Rezervacija()
+			{
+				GostId = rezervacija.GostId,
+				DatumRezervacije = DateTime.Now,
+				DatumCheckIn = rezervacija.DatumCheckIn,
+				DatumCheckOut = rezervacija.DatumCheckOut,
+				BrojGostiju = rezervacija.BrojGostiju,
+				BrojOdraslih = rezervacija.BrojOdraslih,
+				BrojDjece = rezervacija.BrojDjece,
+				NacinPlacanjaId = rezervacija.NacinPlacanjaId,
+				Cijena = rezervacija.Cijena,
+				BrojRezervacije = Guid.NewGuid(),
+			};
+			rezervacijaRepository.Add(novaRezervacija);
+			return novaRezervacija;
 		}
 
 		public IEnumerable<Rezervacija> GetAll()
@@ -57,6 +73,7 @@ namespace eRezervacija.Service
 					BrojGostiju = item.BrojGostiju,
 					BrojDjece = item.BrojDjece,
 					Cijena = item.Cijena,
+					BrojRezervacije=item.BrojRezervacije
 				};
 				returnLista.Add(rezervacija);
 			}
@@ -106,5 +123,13 @@ namespace eRezervacija.Service
 
         }
 
-    }
+		public void UpdateCijenu(int id, float cijena)
+		{
+			var rezervacija=rezervacijaRepository.GetAll().Where(r => r.Id == id).FirstOrDefault();
+			if (rezervacija == null)
+				return;
+			rezervacija.Cijena += cijena;
+			rezervacijaRepository.Update(rezervacija);
+		}
+	}
 }

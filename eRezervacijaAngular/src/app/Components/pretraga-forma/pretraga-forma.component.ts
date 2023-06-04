@@ -29,8 +29,6 @@ export class PretragaFormaComponent {
   Search(){
     this.dateStart=this.datePipe.transform(new Date(this.dateStart), 'yyyy-MM-dd');
     this.dateEnd=this.datePipe.transform(new Date(this.dateEnd), 'yyyy-MM-dd');
-    //this.dateStart=new Date(this.dateStart).toLocaleDateString();
-    //this.dateEnd=new Date(this.dateEnd).toISOString().slice(0,10);
     this.httpKlijent.get(MojConfig.adresa_servera +
       `/api/Hotel/Search?grad=${this.searchTerm.value}&datumCheckIn=${this.dateStart}&datumCheckOut=${this.dateEnd}&brojGostiju=${this.numGuests}&brojSoba=${this.numRooms}`).subscribe((response: any) => {
       sessionStorage.setItem('search-results', JSON.stringify(response));
@@ -48,6 +46,8 @@ export class PretragaFormaComponent {
     sessionStorage.setItem('numGuests',this.numGuests);
     //@ts-ignore
     sessionStorage.setItem('numRooms',this.numRooms);
+    //@ts-ignore
+    sessionStorage.setItem('numDjece',this.numChildren);
   }
 
   getGrad(){

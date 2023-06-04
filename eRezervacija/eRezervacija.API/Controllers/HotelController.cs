@@ -23,9 +23,10 @@ namespace eRezervacija.API.Controllers
 		ISobaService sobaService;
 		ISlikaService slikaService;
 		IRecenzijaService recenzijaService;
+		IHotelPitanjaService hotelPitanjaService;
 
 		public HotelController(IHotelService hotelService, IHotelDetaljiService hotelDetaljiService, IGradService gradService
-			, ISobaService sobaService, ISlikaService slikaService, IRecenzijaService recenzijaService)
+			, ISobaService sobaService, ISlikaService slikaService, IRecenzijaService recenzijaService, IHotelPitanjaService hotelPitanjaService)
 		{
 			this.hotelService = hotelService;
 			this.hotelDetaljiService = hotelDetaljiService;
@@ -33,6 +34,7 @@ namespace eRezervacija.API.Controllers
 			this.sobaService = sobaService;
 			this.slikaService = slikaService;
 			this.recenzijaService = recenzijaService;
+			this.hotelPitanjaService = hotelPitanjaService;
 		}
 
 		[HttpPost]
@@ -68,41 +70,41 @@ namespace eRezervacija.API.Controllers
 			hotelService.Add(noviHotel);
 			gradService.DodajHotelUGradu(hotel.GradID);
 			return noviHotel;
-			
+
 		}
 
-        [HttpPost("{hotelId}")]
-        public ActionResult<Hotel> UpdatePodaciHotel(int hotelId, HotelUpdateVM hotel)
-        {
-            var hotelToUpdate = hotelService.GetByHotelID(hotelId);
-            if (hotelToUpdate == null)
-            {
-                return BadRequest(error: "cannot find hotel");
+		[HttpPost("{hotelId}")]
+		public ActionResult<Hotel> UpdatePodaciHotel(int hotelId, HotelUpdateVM hotel)
+		{
+			var hotelToUpdate = hotelService.GetByHotelID(hotelId);
+			if (hotelToUpdate == null)
+			{
+				return BadRequest(error: "cannot find hotel");
 
-            }
-            hotelToUpdate.Naziv = hotel.Naziv;
-            hotelToUpdate.Opis = hotel.Opis;
-            hotelToUpdate.Adresa = hotel.Adresa;
-            hotelToUpdate.VlasnikID = hotel.VlasnikID;
-            hotelToUpdate.EmailHotela = hotel.EmailHotela;
-            hotelToUpdate.BrojTelefona = hotel.BrojTelefona;
-            hotelToUpdate.slika = hotel.slika.parseBase64();
-            hotelToUpdate.GradID = hotel.GradID;
-            hotelToUpdate.UkupanBrojSoba = hotel.UkupanBrojSoba;
-            hotelToUpdate.BrojJednokrevetnihSoba = hotel.BrojJednokrevetnihSoba;
-            hotelToUpdate.BrojDvokrevetnihSoba = hotel.BrojDvokrevetnihSoba;
-            hotelToUpdate.BrojTrokrevetnihSoba = hotel.BrojTrokrevetnihSoba;
-            hotelToUpdate.BrojSpratova = hotel.BrojSpratova;
-            hotelToUpdate.VrijemeCheckIna = hotel.VrijemeCheckIna;
-            hotelToUpdate.VrijemeCheckOuta = hotel.VrijemeCheckOuta;
-            hotelToUpdate.BrojZvjezdica = hotel.BrojZvjezdica;
-            hotelToUpdate.UdaljenostOdCentraGrada = hotel.UdaljenostOdCentraGrada;
+			}
+			hotelToUpdate.Naziv = hotel.Naziv;
+			hotelToUpdate.Opis = hotel.Opis;
+			hotelToUpdate.Adresa = hotel.Adresa;
+			hotelToUpdate.VlasnikID = hotel.VlasnikID;
+			hotelToUpdate.EmailHotela = hotel.EmailHotela;
+			hotelToUpdate.BrojTelefona = hotel.BrojTelefona;
+			hotelToUpdate.slika = hotel.slika.parseBase64();
+			hotelToUpdate.GradID = hotel.GradID;
+			hotelToUpdate.UkupanBrojSoba = hotel.UkupanBrojSoba;
+			hotelToUpdate.BrojJednokrevetnihSoba = hotel.BrojJednokrevetnihSoba;
+			hotelToUpdate.BrojDvokrevetnihSoba = hotel.BrojDvokrevetnihSoba;
+			hotelToUpdate.BrojTrokrevetnihSoba = hotel.BrojTrokrevetnihSoba;
+			hotelToUpdate.BrojSpratova = hotel.BrojSpratova;
+			hotelToUpdate.VrijemeCheckIna = hotel.VrijemeCheckIna;
+			hotelToUpdate.VrijemeCheckOuta = hotel.VrijemeCheckOuta;
+			hotelToUpdate.BrojZvjezdica = hotel.BrojZvjezdica;
+			hotelToUpdate.UdaljenostOdCentraGrada = hotel.UdaljenostOdCentraGrada;
 
-            hotelService.Update(hotelToUpdate);
-            return hotelToUpdate;
-        }
+			hotelService.Update(hotelToUpdate);
+			return hotelToUpdate;
+		}
 
-        [HttpGet]
+		[HttpGet]
 		//[Autorizacija(Admin: true, Vlasnik: true, Gost: true)]
 		public IEnumerable<Hotel> GetAllHotels()
 		{
@@ -163,13 +165,13 @@ namespace eRezervacija.API.Controllers
 			return hotelDetaljiService.GetAll();
 		}
 
-        [HttpGet("{detaljiId}")]
-        public HotelDetalji GetHotelDetaljiByDetaljiId(int detaljiId)
-        {
+		[HttpGet("{detaljiId}")]
+		public HotelDetalji GetHotelDetaljiByDetaljiId(int detaljiId)
+		{
 			return hotelDetaljiService.GetByHotelDetaljiID(detaljiId);
-        }
+		}
 
-        [HttpGet("{vlasnikId}")]
+		[HttpGet("{vlasnikId}")]
 		public IEnumerable<Hotel> GetHotelByVlasnikId(int vlasnikId)
 		{
 			return hotelService.GetByVlasnikId(vlasnikId);
@@ -185,9 +187,9 @@ namespace eRezervacija.API.Controllers
 
 		[HttpGet]
 		public PagedList<HotelSearchResult> Search(string grad, DateTime datumCheckIn, DateTime datumCheckOut, int brojGostiju, int brojSoba, int pageNumber = 1, int pageSize = 10,
-            [FromQuery] int[] zvjezdice = null, [FromQuery] int[] udaljenost = null, [FromQuery] int[] ocjena = null)
+			[FromQuery] int[] zvjezdice = null, [FromQuery] int[] udaljenost = null, [FromQuery] int[] ocjena = null)
 		{
-			var data = hotelService.Search(grad, datumCheckIn, datumCheckOut, brojGostiju, brojSoba, pageNumber, pageSize, zvjezdice,udaljenost,ocjena);
+			var data = hotelService.Search(grad, datumCheckIn, datumCheckOut, brojGostiju, brojSoba, pageNumber, pageSize, zvjezdice, udaljenost, ocjena);
 			return PagedList<HotelSearchResult>.Create(data, pageNumber, pageSize);
 		}
 
@@ -197,11 +199,54 @@ namespace eRezervacija.API.Controllers
 			var obrisani = hotelService.GetByHotelID(id);
 			slikaService.RemoveByHotelId(id);
 			sobaService.RemoveByHotelId(id);
+			recenzijaService.RemoveByHotelId(id);
 			hotelService.RemoveByHotelId(id);
 			return obrisani;
-        }
+		}
+		[HttpGet("{id}")]
+		public List<Soba> GetHotelRooms(int id)
+		{
+			return sobaService.GetByHotelId(id).DistinctBy(s => s.Naziv).ToList();
+		}
+		[HttpPost]
+		public HotelPitanja PostaviPitanje(HotelPitanjaAddVM pitanje)
+		{
+			return hotelPitanjaService.Add(pitanje);
+		}
+		[HttpGet]
+		public List<HotelPitanja> GetPitanjaForHotel(int hotelId)
+		{
+			return hotelPitanjaService.GetByHotelId(hotelId);
+		}
 
-		
+		[HttpPut("{pitanjeId}")]
+		public HotelPitanja OdgovoriPitanje(int pitanjeId, string tekstOdgovora)
+		{
+			var pitanjeZaOdgovor = hotelPitanjaService.Find(pitanjeId);
+			pitanjeZaOdgovor.OdgovorPitanja = tekstOdgovora;
+			pitanjeZaOdgovor.Odgovoreno = true;
+			pitanjeZaOdgovor.DatumOdgovoreno = DateTime.Now;
+			hotelPitanjaService.Update(pitanjeZaOdgovor);
+			return pitanjeZaOdgovor;
+		}
+
+		[HttpGet("{hotelId}")]
+		public List<HotelPitanja> GetNeodgovorenaPitanja(int hotelId)
+		{
+			return hotelPitanjaService.GetNeodgovorenaPitanjaZaHotel(hotelId);
+		}
+
+		[HttpGet("{hotelId}")]
+		public List<HotelPitanja> GetOdgovorenaPitanja(int hotelId)
+		{
+			return hotelPitanjaService.GetOdgovorenaPitanjaZaHotel(hotelId);
+		}
+
+		[HttpGet("{gostId}")]
+		public List<HotelPitanja> GetPitanjaZaGosta(int gostId)
+		{
+			return hotelPitanjaService.GetPitanjaZaGosta(gostId);
+		}
 	}
 }
 

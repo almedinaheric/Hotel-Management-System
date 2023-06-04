@@ -12,6 +12,7 @@ import {AutentifikacijaHelper} from "../../Helpers/autentifikacija";
 })
 export class NavbarComponent {
   @Input() putanja:any;
+  @Input() prikazi:boolean=true;
   workingUser:any;
   token:any;
 
@@ -44,12 +45,9 @@ export class NavbarComponent {
     let token=MojConfig.http_opcije();
     // @ts-ignore
     AutentifikacijaHelper.setLoginInfo(null);
+    localStorage.setItem('Working-user',"");
     this.httpklijent.post(MojConfig.adresa_servera+'/api/Korisnik/Logout', null, token).subscribe(x=>{
       this.router.navigate(['/']);
     });
-  }
-
-  DodajHotel(){
-    // #TODO: URADITI DODAVANJE HOTELA
   }
 }

@@ -29,14 +29,19 @@
 .accountNavBar{
   display:flex;
   align-items:center;
+  justify-content: center;
+  gap: 1rem;
 }
 
 .accountNavBar #imeprez{
   font-size:0.9rem;
   font-weight:normal;
-  margin-right: 1rem;
 }
 
 .menu-item:hover{
     background-color: var(--gainsboro);
+}
+
+#select{
+  padding-top: 5px;
 }

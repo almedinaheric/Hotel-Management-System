@@ -25,5 +25,7 @@ namespace eRezervacija.Core
 		public string Password{ get; set; }
 		public DateTime DatumKreiranja { get; set; }
 		public DateTime DatumPromjene { get; set; }
-	}
+		public bool isAktiviran { get; set; }
+        public string? PasswordResetToken { get; set; }
+    }
 }

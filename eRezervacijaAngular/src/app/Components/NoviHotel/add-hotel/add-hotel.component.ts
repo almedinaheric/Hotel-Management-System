@@ -8,6 +8,9 @@ import {MojConfig} from "../../../MojConfig";
 import { HotelDataService } from 'src/app/Helpers/hotel-data.service';
 import { SobaDataService } from 'src/app/Helpers/soba-data.service';
 
+import { TranslocoService } from '@ngneat/transloco';
+
+
 @Component({
   selector: 'app-add-hotel',
   templateUrl: './add-hotel.component.html',
@@ -38,7 +41,8 @@ export class AddHotelComponent {
   vlasnikID:any;
 
   constructor(private route: ActivatedRoute,private router:Router,private httpklijent: HttpClient,
-    private hotelDataService: HotelDataService,private sobaDataService:SobaDataService){ }
+    private hotelDataService: HotelDataService,private sobaDataService:SobaDataService,
+    private translocoService: TranslocoService){ }
 
   ngOnInit(){
     this.SectionHeading();

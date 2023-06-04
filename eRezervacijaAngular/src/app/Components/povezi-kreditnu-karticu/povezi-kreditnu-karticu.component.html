@@ -1,12 +1,12 @@
 <div class="wrapper">
-  <h1>Povežite Kreditnu Karticu</h1>
   <div id="poveziKarticu">
-    <app-password-field [password]="brojKartice" label="Broj kreditne kartice"></app-password-field>
+    <app-password-field class="input" [password]="brojKartice" label="{{'BrojKartice'|transloco}}"></app-password-field>
     <div id="selectors">
-      <app-input-field [input]="datumIsteka" label="Datum isteka"></app-input-field>
-      <app-password-field [password]="CVV" label="CVV"></app-password-field>
+      <app-input-field class="input" [input]="datumIsteka" label="{{'DatumIsteka'|transloco}}"></app-input-field>
+      <app-password-field class="input" [password]="CVV" label="CVV"></app-password-field>
     </div>
-    <button *ngIf="this.kartica==null" mat-raised-button color="primary" (click)="DodajKarticu()">Dodaj karticu</button>
-    <button *ngIf="this.kartica!=null" mat-raised-button color="primary" (click)="ObrisiKarticu()">Izbrisi karticu</button>
+    <button *ngIf="this.kartica==null && Nova==false" mat-raised-button color="primary" (click)="DodajKarticu()">{{'DodajKarticu'|transloco}}</button>
+    <button *ngIf="this.kartica!=null && Nova==false" mat-raised-button color="primary" (click)="ObrisiKarticu()">{{'IzbrisiKarticu'|transloco}}</button>
+    <button *ngIf="this.Nova==true" mat-raised-button color="primary" (click)="DodajKarticu()">{{'DodajKarticu'|transloco}}</button>
   </div>
 </div>

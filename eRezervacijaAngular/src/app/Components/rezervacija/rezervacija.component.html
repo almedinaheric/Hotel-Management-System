@@ -1,0 +1,12 @@
+<div class="body">
+    <div class="wrapper">
+        <app-stepper *ngIf="currentIndex==0" [treci]="false"></app-stepper>
+        <app-stepper *ngIf="currentIndex==1" [treci]="true"></app-stepper>
+        <ng-container *ngIf="currentIndex == 0">
+          <app-preview-rezervacije-popup class="content"></app-preview-rezervacije-popup>
+        </ng-container>
+        <ng-container *ngIf="currentIndex == 1">
+            <app-uplata-rezervacije class="content"></app-uplata-rezervacije>
+        </ng-container>
+    </div>
+</div>

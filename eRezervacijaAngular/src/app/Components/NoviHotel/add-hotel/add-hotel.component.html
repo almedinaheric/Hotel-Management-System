@@ -13,7 +13,7 @@
         </ng-container>
     </div>
     <div class="commandButtons">
-        <button mat-raised-button [disabled]="currentIndex == 0" (click)="onBack()" color="primary">Nazad</button>
+        <button mat-raised-button [disabled]="currentIndex == 0" (click)="onBack()" color="primary">{{'Nazad'|transloco}}</button>
         <button mat-raised-button [disabled]="currentIndex==2 && postojiSoba==false"  (click)="onNext()" color="primary">{{contentDalje}}</button>        
     </div>
 </div>

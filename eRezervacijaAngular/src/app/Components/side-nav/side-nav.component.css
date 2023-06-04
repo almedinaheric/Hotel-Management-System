@@ -28,6 +28,11 @@
 
 .sectionName{
   font-size:16px;
+  text-align: left;
+}
+
+#select{
+  padding: 0.5rem 0 0 0.5rem;
 }
 
 @media screen and (min-width: 1000px) and (max-width: 1300px){

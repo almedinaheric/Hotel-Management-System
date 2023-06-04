@@ -13,7 +13,7 @@ export class UploadFileComponent {
   @Input() input:any;
   imageUrl: any;
   imageUrls: any[] = [];
-
+  
   ngOnInit(){
     this.loadImage();
   }

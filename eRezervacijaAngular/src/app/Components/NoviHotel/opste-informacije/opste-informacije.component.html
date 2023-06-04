@@ -1,15 +1,15 @@
 <div class="content">
     <div class="left">
-        <app-input-field class="inputField" id="nazivHotela" label="Naziv hotela" [input]="opsteInfoForm.get('nazivHotela')"></app-input-field>
+        <app-input-field class="inputField" id="nazivHotela" label="{{'NazivHotela'|transloco}}" [input]="opsteInfoForm.get('nazivHotela')"></app-input-field>
         <div class="adresaGrad">
-            <app-select-box id="grad" label="Grad" [passedArray]="gradovi" [NameOrId]="'id'" [formControlInput]="opsteInfoForm.controls.grad"></app-select-box>
-            <app-input-field class="inputField" id="adresa" label="Adresa"  [input]="opsteInfoForm.get('adresa')"></app-input-field>
+            <app-select-box id="grad" label="{{'Grad'|transloco}}" [passedArray]="gradovi" [NameOrId]="'id'" [formControlInput]="opsteInfoForm.controls.grad"></app-select-box>
+            <app-input-field class="inputField" id="adresa" label="{{'adresa'|transloco}}"  [input]="opsteInfoForm.get('adresa')"></app-input-field>
         </div>
         <app-input-field class="inputField" id="email" label="Email" [input]="opsteInfoForm.get('email')"></app-input-field>
-        <app-input-field class="inputField" id="telefon" label="Broj telefona" [input]="opsteInfoForm.get('brojTelefona')" [type]="'tel'"></app-input-field>
-        <app-textarea [label]="'Opis'" [placeholder]="'Ovo je opis hotela...'" [input]="opsteInfoForm.get('opis')"></app-textarea>
+        <app-input-field class="inputField" id="telefon" label="{{'BrojTelefona'|transloco}}" [input]="opsteInfoForm.get('brojTelefona')" [type]="'tel'"></app-input-field>
+        <app-textarea label="{{'Opis'|transloco}}" placeholder="{{'OvoJeOpisHotela'|transloco}}" [input]="opsteInfoForm.get('opis')"></app-textarea>
     </div>
     <div class="right">
-        <app-upload-file [namjena]="'sliku hotela'"></app-upload-file>
+        <app-upload-file namjena="{{'SlikuHotela'|transloco}}"></app-upload-file>
     </div>
 </div>

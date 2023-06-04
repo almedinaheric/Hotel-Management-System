@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,Input } from '@angular/core';
 import {FormControl, Validators} from "@angular/forms";
 import {HttpClient} from "@angular/common/http";
 import {MojConfig} from "../../MojConfig";
@@ -9,26 +9,33 @@ import {MojConfig} from "../../MojConfig";
   styleUrls: ['./povezi-kreditnu-karticu.component.css']
 })
 export class PoveziKreditnuKarticuComponent {
+  @Input() Nova:boolean;
 
   regexBrojKartice="([0-9]){4}[ -]?([0-9]){4}[ -]?([0-9]){4}[ -]?([0-9]){4}";
   regexDatumIsteka="([0-1][0-9])\\/(2[0-9])";
   regexCVV="([0-9]){3}";
-  kartica:any="";
+  kartica:any;
 
   constructor(private httpklijent:HttpClient) {
   }
   ngOnInit(){
+    if(this.Nova==false){
+    this.getajKarticu();
+    }
+  }
+
+  getajKarticu(){
     let user=localStorage.getItem('Working-user')||"";
     let gostid=JSON.parse(user).korisnikID;
-    this.httpklijent.get(MojConfig.adresa_servera+'/api/Korisnik/GetKreditnaKarticaByKorisnikID?korisnikId='+gostid).subscribe((x:any)=>{
-      this.kartica=x;
-      if(this.kartica!=null)
-      {
-        this.brojKartice.setValue(this.kartica.brojKartice);
-        this.datumIsteka.setValue(this.kartica.datumIsteka);
-        this.CVV.setValue(this.kartica.cvv);
-      }
-    })
+      this.httpklijent.get(MojConfig.adresa_servera+'/api/Korisnik/GetKreditnaKarticaByKorisnikID?korisnikId='+gostid).subscribe((x:any)=>{
+        this.kartica=x;
+        if(this.kartica!=null)
+        {
+          this.brojKartice.setValue(this.kartica.brojKartice);
+          this.datumIsteka.setValue(this.kartica.datumIsteka);
+          this.CVV.setValue(this.kartica.cvv);
+        }
+      })
   }
 
   brojKartice = new FormControl('', [Validators.required, Validators.pattern(this.regexBrojKartice)]);
@@ -51,6 +58,7 @@ export class PoveziKreditnuKarticuComponent {
       return false;
     return true;
   }
+
   DodajKarticu()
   {
     if(!this.Validiraj()){
@@ -71,16 +79,20 @@ export class PoveziKreditnuKarticuComponent {
     //@ts-ignore
     porukaSuccess("Uspjesno ste dodali svoju kreditnu karticu");
   }
+
   ObrisiKarticu()
   {
-    if(confirm("Da li ste sigurni?")==true){
-      let user=localStorage.getItem("Working-user")||"";
-      let korisnikId=JSON.parse(user).korisnikID;
-      this.httpklijent.delete(MojConfig.adresa_servera+'/api/Korisnik/IzbrisiKarticu?korisnikId='+korisnikId).subscribe((x:any)=>{
-        location.reload();
-      })
-      //@ts-ignore
-      porukaSuccess("Uspjesno ste izbrisali svoju kreditnu karticu");
+    if(this.Nova==false){
+      if(confirm("Da li ste sigurni?")==true){
+        let user=localStorage.getItem("Working-user")||"";
+        let korisnikId=JSON.parse(user).korisnikID;
+        this.httpklijent.delete(MojConfig.adresa_servera+'/api/Korisnik/IzbrisiKarticu?korisnikId='+korisnikId).subscribe((x:any)=>{
+          location.reload();
+        })
+        //@ts-ignore
+        porukaSuccess("Uspjesno ste izbrisali svoju kreditnu karticu");
+        this.Nova=true;
+      }
     }
   }
 }

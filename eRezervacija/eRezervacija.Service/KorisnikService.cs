@@ -14,7 +14,10 @@ namespace eRezervacija.Service
 		IEnumerable<Korisnik> GetAll();
 		void UpdateKorisnik(Korisnik obj);
 		Korisnik GetByKorisnikID(int id);
-	}
+        Korisnik GetByEmail(string email);
+		void SetPasswordResetToken(int korisnikId, string token);
+		Korisnik GetByPasswordResetToken(string token);
+    }
 	public class KorisnikService : IKorisnikService
 	{
 		IRepository<Korisnik> korisnikRepository;
@@ -43,6 +46,11 @@ namespace eRezervacija.Service
             return korisnikRepository.GetAll().Where(x => x.Id == id).FirstOrDefault();
         }
 
+        public Korisnik GetByEmail(string email)
+        {
+            return korisnikRepository.GetAll().Where(x => x.Email==email).FirstOrDefault();
+        }
+
         public Korisnik GetByLogin(string username, string password, string uloga)
 		{
 			//je li ovo najbolja implementacija?
@@ -61,5 +69,20 @@ namespace eRezervacija.Service
         {
 			korisnikRepository.Update(obj);
         }
+
+		public void SetPasswordResetToken(int korisnikId, string token)
+		{
+			var korisnik = korisnikRepository.GetAll().Where(k => k.Id == korisnikId).FirstOrDefault();
+			if (korisnik != null)
+			{
+				korisnik.PasswordResetToken = token;
+				korisnikRepository.Update(korisnik);
+			}
+		}
+
+		public Korisnik GetByPasswordResetToken(string token)
+		{
+			return korisnikRepository.GetAll().Where(t => t.PasswordResetToken == token).FirstOrDefault();
+		}
     }
 }

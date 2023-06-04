@@ -1,0 +1,22 @@
+<div class="wrapper">
+    <div *ngFor="let language of languages; let i = index" [hidden]="index !== i" class="heading">
+        <div class="heading-div" >
+          <h1>{{ language.title }}</h1>
+          <h2>{{ language.subtitle }}</h2>
+        </div>
+      </div>
+    <div class="odaberiJezik">
+        <div class="jezik" routerLink="pocetna" (click)="changeLanguage('en')">
+            <img class="flag" src="assets/img/united-kingdom.png" >
+            <h2>English</h2>
+        </div>
+        <div class="jezik" routerLink="pocetna" (click)="changeLanguage('bs')">
+            <img class="flag" src="assets/img/bosnia-and-herzegovina.png" >
+            <h2>Bosanski</h2>
+        </div>
+        <div class="jezik" routerLink="pocetna" (click)="changeLanguage('tr')">
+            <img class="flag" src="assets/img/turkey.png" >
+            <h2>Türkçe</h2>
+        </div>
+    </div>
+</div>

@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace eRezervacija.Core.Autentikacija
 {
@@ -21,5 +22,9 @@ namespace eRezervacija.Core.Autentikacija
 		
 		//public DateTime VrijemeEvidentiranja { get; set; }
 		public string? ipAdresa { get; set; }
+
+		[JsonIgnore]
+		public string twoFCode { get; set; }
+		public bool twoFJelOtkljucano { get; set; }
 	}
 }

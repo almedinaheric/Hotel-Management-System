@@ -11,19 +11,23 @@ import { MojConfig } from 'src/app/MojConfig';
   styleUrls: ['./visokoocjenjeni-hoteli.component.css']
 })
 export class VisokoocjenjeniHoteliComponent {
-  hoteli:Hotel[]=[];
+  hoteli:any[]=[];
   dataLoaded:boolean = false;
 
   constructor(private httpklijent:HttpClient,private router:Router) {
   }
   
   fetchHoteli(){
-    this.httpklijent.get<Hotel>(MojConfig.adresa_servera+'/api/Hotel/GetAllHotels',MojConfig.http_opcije()).subscribe((x:any) =>{
+    this.httpklijent.get(MojConfig.adresa_servera+'/api/Hotel/GetAllHotels',MojConfig.http_opcije()).subscribe((x:any) =>{
       this.dataLoaded=true;
       this.hoteli=x.sort(function(a:any,b:any){
         return b.prosjecnaOcjena-a.prosjecnaOcjena
       });
     });
+  }
+
+  logujId(id:any){
+    this.router.navigate(['odabraniHotel',id,'fromLandingPage']);
   }
 
   getSlika(s:any){

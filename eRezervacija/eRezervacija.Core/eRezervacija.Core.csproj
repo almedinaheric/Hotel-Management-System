@@ -18,6 +18,12 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+    <PackageReference Include="MailKit" Version="4.0.0" />
+    <PackageReference Include="MimeKit" Version="4.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="MailKit" />
+    <None Remove="MimeKit" />
+  </ItemGroup>
 </Project>

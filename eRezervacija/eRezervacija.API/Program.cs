@@ -26,6 +26,7 @@ builder.Services.AddDbContext<eRezervacijaDbContext>(options =>
 builder.Services.AddScoped<IKorisnikService, KorisnikService>();
 builder.Services.AddScoped<IGostService, GostService>();
 builder.Services.AddScoped<IGostRepository, GostRepository>(); //custom repository
+builder.Services.AddScoped<ISobaRepository, SobaRepository>(); //custom repository
 builder.Services.AddScoped<IAdminService, AdminService>();
 builder.Services.AddScoped<IAuthTokenService, AuthTokenService>();
 builder.Services.AddScoped<IVlasnikService, VlasnikService>();
@@ -44,6 +45,11 @@ builder.Services.AddScoped<ISobaService,SobaService>();
 builder.Services.AddScoped<ISobaDetaljiService, SobaDetaljiService>();
 builder.Services.AddScoped<ISlikaService, SlikaService>();
 builder.Services.AddScoped<IFAQService,FAQService>();
+builder.Services.AddScoped<IRasporedSobaService,RasporedSobaService>();
+builder.Services.AddScoped<IHotelPitanjaService, HotelPitanjaService>();
+builder.Services.AddScoped<ITransakcijaService, TransakcijaService>();
+builder.Services.AddScoped<ITokenRepository, TokenRepository>(); //custom repository
+builder.Services.AddScoped<INacinPlacanjaService, NacinPlacanjaService>();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
 var app = builder.Build();

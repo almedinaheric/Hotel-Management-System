@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl,FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { MojConfig } from 'src/app/MojConfig';
+import { TranslocoService } from '@ngneat/transloco';
 
 @Component({
   selector: 'app-search-results-page',
@@ -21,7 +22,8 @@ export class SearchResultsPageComponent {
   dateStart:any;
   dateEnd:any;
 
-  constructor(private router: Router,private route: ActivatedRoute,private httpKlijent:HttpClient) {
+  constructor(private router: Router,private route: ActivatedRoute,private httpKlijent:HttpClient, private translocoService: TranslocoService
+    ) {
     this.searchTerm=sessionStorage.getItem('gradPretraga');
     this.numGuests=sessionStorage.getItem('numGuests');
     this.numRooms=sessionStorage.getItem('numRooms');
@@ -70,6 +72,7 @@ export class SearchResultsPageComponent {
     2: this.ocjenaCheckBoxes[2].control,
     1: this.ocjenaCheckBoxes[3].control,
   });
+
 
   saveToSessionStorage() {
     const checkboxValue1:any = {};
@@ -126,15 +129,11 @@ export class SearchResultsPageComponent {
         }
       }
     }
-    console.log(this.zvjezdice);
-    console.log(this.udaljenosti);
-    console.log(this.ocjene);
   }
 
   ngOnInit(){
     this.response=JSON.parse(sessionStorage.getItem("search-results")||"");
     this.hotelsSearched=this.response.dataItems;
-    console.log(this.hotelsSearched);
     this.loadCheckboxesState();
   }
 
@@ -235,12 +234,10 @@ export class SearchResultsPageComponent {
 
     this.httpKlijent.get(MojConfig.adresa_servera + url).subscribe((response: any) => {
       sessionStorage.setItem('search-results', JSON.stringify(response));
-      console.log(response);
       location.reload();
     });
   }
   PaginationChanged(s:any){
-  console.log(s);
     let urlParams:any = {
       grad: this.searchTerm,
       datumCheckIn: this.dateStart,

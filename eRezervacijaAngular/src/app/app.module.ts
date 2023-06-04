@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from "@angular/common/http";
+import {HttpClient, HttpClientModule} from "@angular/common/http";
 
 import {MatButtonModule} from '@angular/material/button';
 import {MatFormFieldModule} from "@angular/material/form-field";
@@ -20,6 +20,8 @@ import { MatToolbar } from '@angular/material/toolbar';
 import {MatSelectModule} from '@angular/material/select';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import {MatGridListModule} from '@angular/material/grid-list';
+import { MatDialogModule } from '@angular/material/dialog';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 import { AppRoutingModule } from './app-routing.module';
 import { NotFoundComponent } from './Components/not-found-page/not-found.component';
@@ -74,15 +76,36 @@ import { HotelCardComponent } from './Components/hotel-card/hotel-card.component
 import { FooterComponent } from './Components/footer/footer.component';
 import { UrediHotelComponent } from './Components/uredi-hotel/uredi-hotel.component';
 import { SupportComponent } from './Components/support/support.component';
-import { MojaPitanjaComponent } from './Components/moja-pitanja/moja-pitanja.component';
 import { ListaPitanjaAdminComponent } from './Components/lista-pitanja-admin/lista-pitanja-admin.component';
 import { OdabraniHotelComponent } from './Components/odabrani-hotel/odabrani-hotel.component';
 import { RecenzijaCardComponent } from './Components/recenzija-card/recenzija-card.component';
 import { ZahtjeviComponent} from "./Components/zahtjevi/zahtjevi.component";
-import {MatPaginatorModule} from "@angular/material/paginator";
-import {DatePipe} from "@angular/common";
-import { ForgotPasswordComponent } from './Components/forgot-password/forgot-password.component';
+import { MatPaginatorModule} from "@angular/material/paginator";
+import { DatePipe} from "@angular/common";
 import { UpdatePasswordComponent } from './Components/update-password/update-password.component';
+import { TabelaSobaComponent} from "./Components/tabela-soba/tabela-soba.component";
+import { AmenityComponent } from './Components/amenity/amenity.component';
+import { PitanjeCardComponent } from './Components/pitanje-card/pitanje-card.component';
+import { ListaPitanjaVlasnikComponent } from './Components/lista-pitanja-vlasnik/lista-pitanja-vlasnik.component';
+import { PostaviPitanjeComponent } from './Components/postavi-pitanje/postavi-pitanje.component';
+import { KodZaRecenzijuComponent } from './Components/kod-za-recenziju/kod-za-recenziju.component';
+import { DodajRecenzijuComponent } from './Components/dodaj-recenziju/dodaj-recenziju.component';
+import { StarRatingComponent } from './Components/star-rating/star-rating.component';
+import { ForgotPassEmailComponent } from './Components/forgot-pass-email/forgot-pass-email.component';
+import { PreviewRezervacijePopupComponent } from './Components/preview-rezervacije-popup/preview-rezervacije-popup.component';
+import { TwoFaktorComponent } from './Components/two-faktor/two-faktor.component';
+import { UserNotActiveComponent } from './Components/user-not-active/user-not-active.component';
+import { UplataRezervacijeComponent } from './Components/uplata-rezervacije/uplata-rezervacije.component';
+import { StepperComponent } from './Components/stepper/stepper.component';
+import { RezervacijaComponent } from './Components/rezervacija/rezervacija.component';
+import { KreditnaKarticaComponent } from './Components/kreditna-kartica/kreditna-kartica.component';
+import { PrikaziBrojRezervacijeComponent } from './Components/prikazi-broj-rezervacije/prikazi-broj-rezervacije.component';
+import { ClipboardModule } from '@angular/cdk/clipboard';
+import { SelectLanguageComponent } from './Components/select-language/select-language.component';
+import { TranslocoRootModule } from './transloco-root.module';
+import {translate} from "@ngneat/transloco";
+import {LanguageSelectorComponent} from "./Components/change-language";
+import { OdaberiJezikComponent } from './Components/odaberi-jezik/odaberi-jezik.component';
 
 @NgModule({
   declarations: [
@@ -92,6 +115,8 @@ import { UpdatePasswordComponent } from './Components/update-password/update-pas
     ProfileComponent,
     LoginAdminComponent,
     LoginVlasnikComponent,
+    TabelaSobaComponent,
+    AmenityComponent,
     LoginGostComponent,
     RegisterAdminComponent,
     RegisterGostComponent,
@@ -135,13 +160,29 @@ import { UpdatePasswordComponent } from './Components/update-password/update-pas
     FooterComponent,
     UrediHotelComponent,
     SupportComponent,
-    MojaPitanjaComponent,
     ListaPitanjaAdminComponent,
     OdabraniHotelComponent,
     RecenzijaCardComponent,
     ZahtjeviComponent,
-    ForgotPasswordComponent,
-    UpdatePasswordComponent
+    UpdatePasswordComponent,
+    PitanjeCardComponent,
+    ListaPitanjaVlasnikComponent,
+    PostaviPitanjeComponent,
+    KodZaRecenzijuComponent,
+    DodajRecenzijuComponent,
+    StarRatingComponent,
+    ForgotPassEmailComponent,
+    PreviewRezervacijePopupComponent,
+    TwoFaktorComponent,
+    UserNotActiveComponent,
+    UplataRezervacijeComponent,
+    StepperComponent,
+    RezervacijaComponent,
+    KreditnaKarticaComponent,
+    PrikaziBrojRezervacijeComponent,
+    SelectLanguageComponent,
+    LanguageSelectorComponent,
+    OdaberiJezikComponent
   ],
     imports: [
         BrowserModule,
@@ -170,7 +211,11 @@ import { UpdatePasswordComponent } from './Components/update-password/update-pas
         MatSelectModule,
         MatProgressSpinnerModule,
         MatGridListModule,
-        MatPaginatorModule
+        MatPaginatorModule,
+        MatDialogModule,
+        MatSnackBarModule,
+        ClipboardModule,
+        TranslocoRootModule,
     ],
   providers: [DatePipe],
   bootstrap: [AppComponent]

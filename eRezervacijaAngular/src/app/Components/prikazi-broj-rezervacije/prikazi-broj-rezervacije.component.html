@@ -1,0 +1,15 @@
+<div class="wrapper">
+    <h2 id="title" mat-dialog-title>{{'BrojRezervacije'|transloco}}</h2>
+    <mat-dialog-content id="content">
+      <h4>{{brojRezervacije}}</h4>
+        <mat-icon id="icon" 
+        (mouseover)="showCopyTooltip()" 
+        (click)="leaveAMessage()" 
+        (mouseleave)="hideCopyTooltip()" 
+        [cdkCopyToClipboard]="brojRezervacije.toString()">content_copy</mat-icon>
+    </mat-dialog-content>
+    <div *ngIf="showTooltip" class="tooltip">{{tooltipText}}</div>
+    <mat-dialog-actions id="actions">
+      <button mat-button (click)="dialogRef.close()">Ok</button>
+    </mat-dialog-actions>
+</div>

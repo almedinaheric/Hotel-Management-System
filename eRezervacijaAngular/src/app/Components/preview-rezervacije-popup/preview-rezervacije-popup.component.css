@@ -1,0 +1,49 @@
+.card-header {
+    width: 100%;
+    padding: 1rem 0;
+    background-color: var(--material-ui-primary);
+    color: var(--white);
+    display: flex;
+    justify-content: center;
+    border-radius: 5px 5px 0 0;
+}
+  
+.card-title {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.podaci{
+    display: flex;
+    justify-content: space-between;
+    padding: 2rem;
+}
+
+#naslovh4{
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--dim-grey);
+    margin-bottom: 1rem ;
+}
+
+.actions{
+    border-top: 1px solid var(--silver);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.actions button{
+    width: 20%;
+}
+
+p{
+    font-weight: 500;
+    font-size: 18px;
+}
+
+#cijena{
+    font-size: 20px;
+    font-weight: 600;
+    color: rgb(183, 31, 31);
+}

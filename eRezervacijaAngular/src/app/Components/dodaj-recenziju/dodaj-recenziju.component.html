@@ -1,0 +1,24 @@
+<div class="wrapper">
+    <h2 id="title" mat-dialog-title>{{'PodaciRezervacije'|transloco}}</h2>
+    <mat-dialog-content>
+        <p id="subtitle">{{'BrojRezervacijeNaProfilu'|transloco}}</p>
+        <div class="content">
+            <div class="ocjena">
+                <p>{{'DodajteOcjenu'|transloco}}</p>
+                <app-star-rating [rating]="rating"  [starCount]="starCount" [color]="color" (ratingUpdated)="onRatingChanged($event)"></app-star-rating>
+            </div>
+            <div class="komentar">
+                <p>{{'DodajteKomentar'|transloco}}</p>
+                <mat-form-field id="form">
+                    <textarea id="text" matInput maxlength="150" [(ngModel)]="input" (input)="prebrojiZnakove()" placeholder="{{'NprOdlicnaUsluga'|transloco}}"></textarea>
+                </mat-form-field>
+            </div>
+        </div>
+    <small>{{'Preostalo'|transloco}} {{ preostaloZnakova }} {{'Znakova'|transloco}}</small> <br>
+    <mat-error *ngIf="warning">{{'MorateUnijetiKomentar'|transloco}}</mat-error>
+    </mat-dialog-content>
+    <mat-dialog-actions id="actions">
+      <button mat-button (click)="dialogRef.close()">{{'Odustani'|transloco}}</button>
+      <button mat-raised-button color="primary" (click)="dodajRecenziju()">{{'Potvrdi'|transloco}}</button>
+    </mat-dialog-actions>
+</div>

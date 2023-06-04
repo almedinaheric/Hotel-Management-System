@@ -59,6 +59,7 @@
 a {
   text-decoration: none;
   color: #2196f3;
+  cursor: pointer;
 }
 .close{
   position: absolute;

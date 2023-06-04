@@ -28,6 +28,6 @@ export class HotelCardComponent {
 
   openHotelDetails(hotelId: any) {
     this.id=hotelId.id;
-    this.router.navigate(['odabraniHotel', this.id]);
+    this.router.navigate(['odabraniHotel', this.id,'fromCard']);
   }
 }

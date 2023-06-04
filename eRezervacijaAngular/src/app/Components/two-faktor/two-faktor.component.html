@@ -1,0 +1,15 @@
+<mat-card class="card">
+  <mat-card-header class="card-header">
+    <button mat-icon-button class="close" (click)="dialogRef.close()">
+      <mat-icon>close</mat-icon>
+    </button>
+    <mat-card-title class="card-title">{{'2fauth'|transloco}}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="card-content">
+    <div id="inputfield">
+      <app-input-field [input]="code" label="{{'2fauthcode'|transloco}}"></app-input-field>
+    </div>
+    <button class="otkljucajButton" mat-raised-button color="primary" (click)="otkljucaj()">{{'Otkljucaj'|transloco}}</button>
+  </mat-card-content>
+</mat-card>
+

@@ -1,21 +1,55 @@
-<div class="wrapper">
-  <h1>Moja pitanja</h1>
-  <div class="tableDiv">
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 table">
-      <ng-container class="ngContainer" matColumnDef="pitanje">
-        <th mat-header-cell *matHeaderCellDef class="mat-header-cel"> Pitanje </th>
-        <td mat-cell *matCellDef="let element" class="mat-cell"> {{element.tekstPitanja}} </td>
-      </ng-container>
-      <ng-container class="ngContainer columnOdgovor" matColumnDef="odgovor">
-        <th mat-header-cell *matHeaderCellDef class="mat-header-cel"> Odgovor </th>
-        <td mat-cell *matCellDef="let element" class="mat-cell"> {{element.odgovorPitanja}} </td>
-      </ng-container>
-      <ng-container class="ngContainer" matColumnDef="datumOdgovoreno">
-        <th mat-header-cell *matHeaderCellDef class="mat-header-cel"> Datum odgovora </th>
-        <td mat-cell *matCellDef="let element" class="mat-cell"> {{element.datumOdgovoreno}} </td>
-      </ng-container>
-      <tr mat-header-row *matHeaderRowDef="displayedColumns" ></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
+<div class="wrapper" *ngIf="!dataLoaded">
+  <h1>{{'MojaPitanja'|transloco}}</h1>
+  <h4>{{'PitanjaSeUcitavaju'|transloco}}</h4>
+  <mat-spinner class="spinner" diameter="60"></mat-spinner>
+</div>
+
+<div class="wrapper" *ngIf="dataLoaded">
+  <h1>{{'MojaPitanja'|transloco}}</h1>
+  <div class="innerWrapper">
+    <h1>{{'KorisnickaPodrska'|transloco}}</h1>
+    <div class="tableDiv">
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 table">
+        <ng-container class="ngContainer  mat-column-pitanje" matColumnDef="pitanje">
+          <th mat-header-cell *matHeaderCellDef class="mat-header-cel"> {{'Pitanje'|transloco}}  </th>
+          <td mat-cell *matCellDef="let element" class="mat-cell"> {{element.tekstPitanja}} </td>
+        </ng-container>
+        <ng-container class="ngContainer mat-column-odgovor columnOdgovor" matColumnDef="odgovor">
+          <th mat-header-cell *matHeaderCellDef class="mat-header-cel"> {{'Odgovor'|transloco}}  </th>
+          <td mat-cell *matCellDef="let element" class="mat-cell"> {{element.odgovorPitanja}} </td>
+        </ng-container>
+        <ng-container class="ngContainer mat-column-datum" matColumnDef="datumOdgovoreno">
+          <th mat-header-cell *matHeaderCellDef class="mat-header-cel"> {{'DatumOdgovora'|transloco}}  </th>
+          <td mat-cell *matCellDef="let element" class="mat-cell"> {{element.datumOdgovoreno}} </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns" ></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
+  </div>
+  <div class="innerWrapper">
+    <h1>{{'PitanjaZaObjekat'|transloco}}</h1>
+    <div class="tableDiv">
+      <table mat-table [dataSource]="dataSourceObjekat" class="mat-elevation-z8 table">
+        <ng-container class="ngContainer  mat-column-hotel" matColumnDef="hotel">
+          <th mat-header-cell *matHeaderCellDef class="mat-header-cel"> {{'Hotel'|transloco}} </th>
+          <td mat-cell *matCellDef="let element" class="mat-cell"> {{element.hotel}} </td>
+        </ng-container>
+        <ng-container class="ngContainer  mat-column-pitanje" matColumnDef="pitanje">
+          <th mat-header-cell *matHeaderCellDef class="mat-header-cel"> {{'Pitanje'|transloco}} </th>
+          <td mat-cell *matCellDef="let element" class="mat-cell"> {{element.tekstPitanja}} </td>
+        </ng-container>
+        <ng-container class="ngContainer mat-column-odgovor columnOdgovor" matColumnDef="odgovor">
+          <th mat-header-cell *matHeaderCellDef class="mat-header-cel"> {{'Odgovor'|transloco}} </th>
+          <td mat-cell *matCellDef="let element" class="mat-cell"> {{element.odgovorPitanja}} </td>
+        </ng-container>
+        <ng-container class="ngContainer mat-column-datum" matColumnDef="datumOdgovoreno">
+          <th mat-header-cell *matHeaderCellDef class="mat-header-cel"> {{'DatumOdgovora'|transloco}} </th>
+          <td mat-cell *matCellDef="let element" class="mat-cell"> {{element.datumOdgovoreno}} </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumnsObjekat"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumnsObjekat;"></tr>
+      </table>
+    </div>
   </div>
 </div>

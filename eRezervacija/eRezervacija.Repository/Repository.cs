@@ -55,6 +55,7 @@ namespace eRezervacija.Repository
 
         public void Update(TEntity obj)
 		{
+			//_dbContext.ChangeTracker.Clear(); //izbrisati ako ikako bude problema sa update, upitna linija koda
 			_dbContext.Entry(obj).State = EntityState.Modified;
 			_dbContext.SaveChanges();
 		}

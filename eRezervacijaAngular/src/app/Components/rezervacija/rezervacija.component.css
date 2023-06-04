@@ -1,0 +1,26 @@
+.wrapper{
+    padding-top:3rem;
+    height: fit-content;
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.body{
+    background-color: var(--ghost-white);
+    min-height: 100%;
+    max-height: fit-content;
+}
+
+.content{
+    width: 80%;
+    margin-top: 4rem;
+}
+
+@media screen and (min-width: 1000px) and (max-width: 1300px){
+    .wrapper{
+        width: 90%;
+    }
+}

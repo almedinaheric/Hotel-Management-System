@@ -3,6 +3,7 @@ import { FormControl,Validators,FormGroup, FormBuilder } from '@angular/forms';
 import {HttpClient} from "@angular/common/http";
 import {MojConfig} from "../../../MojConfig";
 import {Router} from "@angular/router";
+import {DatePipe} from "@angular/common";
 
 @Component({
   selector: 'app-register-form',
@@ -17,9 +18,10 @@ export class RegisterFormComponent {
   novi:any;
   spolNovi:any;
   ruta:any;
-  odabraniSpol:any
+  odabraniSpol:any;
+  regexPassword: RegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()\-_=+{}[\]\\|;:'",.<>\/?]).{8,}$/;
 
-  constructor(private httpklijent: HttpClient, private router: Router,private fb: FormBuilder) {
+  constructor(private httpklijent: HttpClient, private router: Router,private fb: FormBuilder, private datePipe:DatePipe) {
 
   }
 
@@ -28,11 +30,11 @@ export class RegisterFormComponent {
   ime = new FormControl('', [Validators.required]);
   prezime = new FormControl('', [Validators.required]);
   email = new FormControl('', [Validators.required,Validators.email]);
-  datumRodjenja = new FormControl(new Date().toLocaleDateString());
+  datumRodjenja=new FormControl(this.datePipe.transform(new Date(),'yyyy-MM-dd'));
   brojTelefona = new FormControl('', [Validators.required,Validators.pattern(this.regexBrojTelefona)]);
 
   username = new FormControl('', [Validators.required]);
-  password = new FormControl('', [Validators.required]);
+  password = new FormControl('', [Validators.required,Validators.pattern(this.regexPassword)]);
   confirmedPassword = new FormControl('', [Validators.required]);
 
   brojRacuna = new FormControl('', [Validators.required,Validators.minLength(16),Validators.maxLength(16)]);
@@ -48,7 +50,7 @@ export class RegisterFormComponent {
       porukaError("Check your input");
       return false;
     }
-    if(this.OwnerGuest=='owner'){
+    if(this.OwnerGuest=='Owner'){
       if(this.brojRacuna.invalid|| this.brojLicneKarte.hasError('required')){
         //@ts-ignore
         porukaError("Check your input");
@@ -65,14 +67,18 @@ export class RegisterFormComponent {
       porukaError("Neispravan email");
       return false;
     }
+    if (this.password.hasError('pattern')) {
+      //@ts-ignore
+      porukaError('Password must contain at least 8 characters including uppercase, lowercase, digits and special characters.');
+      return false;
+    }
     return true;
   }
 
   Registracija() {
     if (!this.Validiraj())
       return;
-
-    if(this.OwnerGuest=='owner') {
+    if(this.OwnerGuest=='Owner') {
       this.url=MojConfig.adresa_servera + '/api/Korisnik/RegistracijaVlasnik';
       this.novi={
         ime: this.ime.value,
@@ -89,7 +95,7 @@ export class RegisterFormComponent {
       this.ruta="loginVlasnik";
     }
 
-    else if(this.OwnerGuest=='guest') {
+    else if(this.OwnerGuest=='Guest') {
       this.url=MojConfig.adresa_servera + '/api/Korisnik/RegistracijaGost';
       this.novi = {
         ime: this.ime.value,
@@ -103,7 +109,7 @@ export class RegisterFormComponent {
       };
       this.ruta="loginGost";
     }
-    else if(this.OwnerGuest=='admin'){
+    else if(this.OwnerGuest=='Admin'){
       this.url=MojConfig.adresa_servera+'/api/Korisnik/RegistracijaAdmin';
       this.novi={
         ime: this.ime.value,

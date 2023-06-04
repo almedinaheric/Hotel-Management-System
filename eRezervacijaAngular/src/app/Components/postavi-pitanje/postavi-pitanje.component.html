@@ -1,0 +1,15 @@
+<div class="wrapper">
+    <h2 id="title" mat-dialog-title>{{'NistePronasliOdgovor'|transloco}}</h2>
+    <mat-dialog-content>
+      <p>{{'OvdjeUpisitePitanje'|transloco}}</p>
+      <mat-form-field id="form">
+        <textarea id="text" matInput maxlength="300" [(ngModel)]="input" (input)="prebrojiZnakove()" placeholder="{{'PrevozDoAerodroma'|transloco}}"></textarea>
+    </mat-form-field>
+    <small>{{'Preostalo'|transloco}} {{ preostaloZnakova }} {{'Znakova'|transloco}}</small> <br>
+    <mat-error *ngIf="warning">{{'MorateUnijetiPoruku'|transloco}}</mat-error>
+    </mat-dialog-content>
+    <mat-dialog-actions id="actions">
+      <button mat-button (click)="dialogRef.close()">{{'Odustani'|transloco}}</button>
+      <button mat-raised-button color="primary" (click)="posaljiPitanje()">{{'PosaljitePitanje'|transloco}}</button>
+    </mat-dialog-actions>
+</div>

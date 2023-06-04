@@ -1,0 +1,114 @@
+.card-header {
+    width: 100%;
+    padding: 1rem 0;
+    background-color: var(--material-ui-primary);
+    color: var(--white);
+    display: flex;
+    justify-content: center;
+    border-radius: 5px 5px 0 0;
+}
+  
+.card-title {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.nacinUplate{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 2rem 0;
+}
+
+.nacinUplate h4{
+    font-size: 20px;
+    font-weight: 500;
+}
+
+#radioGroup{
+    margin-top: 1rem ;
+    display: flex;
+    gap: 10rem;
+    align-items: center;
+}
+
+#nacinplacanjah4{
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--dim-grey);
+    margin-bottom: 2rem ;
+}
+
+.izborUplate{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+    height: 5rem;
+}
+
+.izborUplate h4{
+    margin: 0;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.kartica, .gotovina{
+    width: 46%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background-color: var(--ghost-white);
+    color: var(--material-ui-primary);
+}
+
+.kartica:hover, .gotovina:hover{
+    background-color: rgb(32, 153, 32);
+    color: white;
+}
+
+.actions{
+    border-top: 1px solid var(--silver);
+    padding: 1rem 2rem;
+    margin-top: 4rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.actions button{
+    width: 20%;
+}
+
+.clicked{
+    background-color:rgb(32, 153, 32);
+    color: white;
+}
+
+.izborKartice{
+    display: flex;
+    justify-content: space-evenly;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.staraKartica, .novaKartica{
+    width: 45%;
+}
+
+.nova{
+    width: 80%;
+}
+
+#hint{
+    padding: 1rem 0;
+    color: var(--royal-blue);
+}
+
+@media screen and (min-width: 1000px) and (max-width: 1300px){
+    .card{
+        margin-bottom: 4rem;
+    }
+}

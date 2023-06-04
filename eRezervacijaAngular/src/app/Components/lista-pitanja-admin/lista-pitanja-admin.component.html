@@ -1,14 +1,14 @@
 <div class="wrapper">
-  <h1>Pitanja gostiju</h1>
+  <h1>{{'PitanjaGostiju'|transloco}}</h1>
   <div class="tableDiv">
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 table">
       <ng-container class="ngContainer" matColumnDef="tekstPitanja">
-        <th mat-header-cell *matHeaderCellDef class="mat-header-cel"> Pitanje  </th>
+        <th mat-header-cell *matHeaderCellDef class="mat-header-cel">{{'Pitanje'|transloco}}</th>
         <td mat-cell *matCellDef="let element" class="mat-cell"> {{element.tekstPitanja}} </td>
       </ng-container>
       <ng-container class="ngContainer" matColumnDef="actions">
-        <th mat-header-cell *matHeaderCellDef class="mat-header-cel"> Actions </th>
-        <td mat-cell *matCellDef="let element"> <button mat-raised-button color="primary" (click)="Odgovori(element.id)">Odgovori</button> </td>
+        <th mat-header-cell *matHeaderCellDef class="mat-header-cel">{{'Akcija'|transloco}}</th>
+        <td mat-cell *matCellDef="let element"> <button mat-raised-button color="primary" (click)="Odgovori(element.id)">{{'Odgovori'|transloco}}</button> </td>
       </ng-container>
       <tr mat-header-row *matHeaderRowDef="displayedColumns" ></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
@@ -16,9 +16,9 @@
   </div>
 
   <div id="Odgovor">
-    <h1>Odgovor</h1>
+    <h1>{{'Odgovor'|transloco}}</h1>
     <mat-form-field [style.fontSize]="14" appearance="fill" id="forma">
-      <mat-label>Odgovor</mat-label>
+      <mat-label>{{'Odgovor'|transloco}}</mat-label>
       <textarea matInput
                 cdkTextareaAutosize
                 #autosize="cdkTextareaAutosize"

@@ -2,10 +2,16 @@
     <app-navbar [putanja]="'landingPage'"></app-navbar>
     <div class="inner-wrapper">
         <div class="top">
-            <button mat-button (click)="NaSearchResults()">
+            <button mat-button *ngIf="from=='fromCard'" (click)="NaSearchResults()">
                 <div class="navigation">
                   <mat-icon>arrow_back</mat-icon>
-                  <span>Nazad na početnu stranicu</span>
+                  <span>{{'Nazad'|transloco}}</span>
+                </div>
+            </button>
+            <button mat-button *ngIf="from=='fromLandingPage'" (click)="NaLanding()">
+                <div class="navigation">
+                  <mat-icon>arrow_back</mat-icon>
+                  <span>{{'NazadNaPocetnu'|transloco}}</span>
                 </div>
             </button>
         </div>
@@ -23,9 +29,9 @@
                 <p>|</p>
                 <p id="drzava" class="adresaitem">{{drzava?.name}}</p>
                 <p>|</p>
-                <p id="udaljenost" class="adresaitem">Do centra grada: {{hotel?.udaljenostOdCentraGrada}} km</p>
+                <p id="udaljenost" class="adresaitem">{{'DoCentraGrada'|transloco}}  {{hotel?.udaljenostOdCentraGrada}} km</p>
                 <p>|</p>
-                <p id="prosjecnaOcjena" class="adresaitem">Prosjecna ocjena: {{hotel?.prosjecnaOcjena}}</p>
+                <p id="prosjecnaOcjena" class="adresaitem">{{'ProsjecnaOcjena'|transloco}} {{hotel?.prosjecnaOcjena}}</p>
             </div>
             <div class="slika" *ngIf="hotel">
                 <div class="left">
@@ -33,7 +39,7 @@
                 </div>
                 <div class="slikeSoba">
                     <div class="wrapper spinnerWrapper" *ngIf="!dataLoaded">
-                        <h4>Ostale slike se učitavaju, pričekajte trenutak!</h4>
+                        <h4>{{'SlikeSeUcitavaju'|transloco}}</h4>
                         <mat-spinner class="spinner" diameter="60"></mat-spinner>
                       </div>
 
@@ -46,7 +52,7 @@
             </div>
             <div class="opisDetalji">
                 <mat-card class="opis">
-                    <mat-card-content id="contentOpis" [style.max-height]="expanded ? 'none' : '15rem'" 
+                    <mat-card-content id="contentOpis" [style.max-height]="expanded ? 'none' : '15rem'"
                     [style.overflow]="expanded ? 'visible' : 'hidden'">
                       <p>{{hotel?.opis}}</p>
                     </mat-card-content>
@@ -55,45 +61,82 @@
                     </button>
                   </mat-card>
                   <div class="informacije">
-                    <h2>INFORMACIJE I KONTAKT</h2>
-                    <h4>Broj spratova hotela: <label class="labelInfo">{{hotel?.brojSpratova}}</label></h4>
-                    <h4>Vrijeme Check In-a: <label class="labelInfo">{{hotel?.vrijemeCheckIna}}</label></h4>
-                    <h4>Vrijeme Check Out-a: <label class="labelInfo">{{hotel?.vrijemeCheckOuta}}</label></h4>
-                    <h4>Broj telefona: <label class="labelInfo">{{hotel?.brojTelefona}}</label></h4>
+                    <h2>{{'InformacijeKontakt'|transloco}}</h2>
+                    <h4>{{'BrojSpratovaHotela'|transloco}} <label class="labelInfo">{{hotel?.brojSpratova}}</label></h4>
+                    <h4>{{'VrijemeCheckIna'|transloco}}<label class="labelInfo">{{hotel?.vrijemeCheckIna}}</label></h4>
+                    <h4>{{'VrijemeCheckOuta'|transloco}}<label class="labelInfo">{{hotel?.vrijemeCheckOuta}}</label></h4>
+                    <h4>{{'BrTelefona'|transloco}} <label class="labelInfo">{{hotel?.brojTelefona}}</label></h4>
                     <h4>Email: <label class="labelInfo">{{hotel?.emailHotela}}</label></h4>
                   </div>
             </div>
             <div class="amenities">
                 <div id="divDetalji">
                     <div class="detalji">
-                        <h3>U ponudu hotela su uključeni: </h3>
+                        <h3>{{'UPonuduHotelaSuUkljuceni'|transloco}}</h3>
                         <p class="detalj">{{ detalji.join(', ') }}</p>
                       </div>
                 </div>
             </div>
+            <mat-divider *ngIf="from=='fromCard'" style="margin-top: 2rem;"></mat-divider>
+            <div class="availability" *ngIf="from=='fromCard'">
+                <h2>{{'Dostupnost'|transloco}}</h2>
+                <app-tabela-soba [hotelId]="hotelId" (sendData)="receiveData($event)"></app-tabela-soba>
+              <br>
+                <button mat-raised-button color="primary" (click)="rezervisi()">{{'Rezervisi'|transloco}} </button>
+            </div>
             <mat-divider style="margin-top: 2rem;"></mat-divider>
             <div class="rec">
-                <h2>RECENZIJE</h2>
+                <div class="rec buttonrec">
+                    <h2>{{'RecenzijeGostiju'|transloco}}</h2>
+                    <button mat-stroked-button color="primary" (click)="dodajRecenziju()">{{'DodajteRecenziju'|transloco}}</button>
+                </div>
                 <div class="recenzijeContainer" *ngIf="brojRecenzija!=0">
                     <button mat-icon-button (click)="scroll(-1)" [disabled]="scrollLeftDisabled">
                       <mat-icon>keyboard_arrow_left</mat-icon>
                     </button>
-                    <div class="recenzije" #recenzije *ngFor="let recenzija of recenzije">
-                        <app-recenzija-card class="recenzija" [osoba]="recenzija.osobaIme" 
-                        [komentar]="recenzija.komentar" 
-                        [ocjena]="recenzija.ocjena"></app-recenzija-card>
+                    <div class="recenzije" #recenzijeclass>
+                        <div class="recenzijeclass"  *ngFor="let recenzija of recenzije">
+                            <app-recenzija-card class="recenzija" [osoba]="recenzija.osobaIme"
+                            [komentar]="recenzija.komentar"
+                            [ocjena]="recenzija.ocjena"></app-recenzija-card>
+                        </div>
                     </div>
                     <button id="showMoreButton" mat-icon-button (click)="scroll(1)" [disabled]="scrollRightDisabled">
                       <mat-icon>keyboard_arrow_right</mat-icon>
                     </button>
                 </div>
                 <div class="nemaRecenzija"  *ngIf="brojRecenzija==0">
-                    <h4 id="nemaRec">Ovaj hotel još uvijek nema recenzija!</h4>
+                    <h4 id="nemaRec">{{'OvajHotelNemaRecenzija'|transloco}}</h4>
                 </div>
             </div>
-            <div class="pitanja">
-                <!-- #TODO: OVDJE URADITI SLANJE UPITA VLASNIKU HOTELA -->
+            <mat-divider style="margin-top: 2rem;"></mat-divider>
+            <div class="pitanjaDiv">
+                <div class="pitanjaDiv butonpitanje">
+                    <h2>{{'PitanjaOdgovoriVezaniZaObjekat'|transloco}}</h2>
+                    <button mat-stroked-button color="primary" (click)="postaviPitanje()">{{'PostavitePitanje'|transloco}}</button>
+                </div>
+                <div class="pitanjaContainer" *ngIf="brojPitanja!=0">
+                    <button mat-icon-button (click)="scrollPitanja(-1)" [disabled]="scrollLeftDisabledPitanja">
+                        <mat-icon>keyboard_arrow_left</mat-icon>
+                    </button>
+                    <div class="pitanja" #pitanjaclass>
+                        <div class="pitanjaclass" *ngFor="let pitanje of pitanja">
+                            <app-pitanje-card id="pitanje"
+                            [pitanje]="pitanje.tekstPitanja"
+                            [odgovor]="pitanje.odgovorPitanja"
+                            [datumOdgovora]="pitanje.datumOdgovoreno | date:'dd/MM/yyyy'">
+                            </app-pitanje-card>
+                        </div>
+                    </div>
+                    <button id="showMoreButton" mat-icon-button (click)="scrollPitanja(1)" [disabled]="scrollRightDisabledPitanja">
+                        <mat-icon>keyboard_arrow_right</mat-icon>
+                    </button>
+                </div>
+                <div class="nemaPitanja" *ngIf="brojPitanja==0">
+                    <h4 id="nemaPit">{{'NemaPostavljenihPitanja'|transloco}}</h4>
+                </div>
             </div>
         </div>
     </div>
+    <app-footer></app-footer>
 </div>

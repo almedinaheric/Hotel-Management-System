@@ -71,7 +71,6 @@ export class AddSobaComponent {
       sessionStorage.removeItem('roomAmenities');
       sessionStorage.removeItem('opsteInformacijeSoba');
       sessionStorage.removeItem('imageUrls');
-      // this.sobaDataService.clearSobaData();
       this.router.navigate(["dodajHotel/addHotel",2]);
     }
     this.SectionHeading();

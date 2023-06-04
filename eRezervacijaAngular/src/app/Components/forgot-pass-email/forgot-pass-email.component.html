@@ -1,0 +1,18 @@
+<div class="wrapper">
+    <mat-card class="card">
+        <mat-card-header class="card-header">
+          <mat-card-title class="card-title">{{'ResetYourPassword'|transloco}}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="card-content">
+          <h4 class="card-subtitle">{{'UnesiteEmailZaForgotPass'|transloco}}</h4>
+          <div class="emailDiv">
+            <mat-label id="label">{{'UnesiteEmail'|transloco}}</mat-label>  
+            <app-input-field id="email" label="Email" [input]="email"></app-input-field>
+          </div>
+          <div class="buttons">
+            <button class="login-button card-content-items" mat-raised-button color="primary" (click)="Potvrdi()">{{'ObnoviLozinku'|transloco}}</button>
+            <button class="login-button card-content-items" mat-stroked-button (click)="BackToLogin()">{{'BackToLogin'|transloco}}</button>
+          </div>
+        </mat-card-content>
+      </mat-card> 
+</div>

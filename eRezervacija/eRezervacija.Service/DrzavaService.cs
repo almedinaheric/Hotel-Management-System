@@ -40,12 +40,6 @@ namespace eRezervacija.Service
         {
             drzavaRepository.Remove(obj);
         }
-
-        //public void RemoveById(int id)
-        //{
-        //    var odabranaDrzava = drzavaRepository.GetById(id);
-        //    drzavaRepository.Remove(odabranaDrzava);
-        //}
     }
 }
 

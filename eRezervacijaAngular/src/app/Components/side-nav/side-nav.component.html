@@ -2,24 +2,26 @@
   <button *ngIf="ovajKorisnik.korisnik.uloga === 'Gost'" mat-button (click)="NaLandingPage()">
     <div class="navigation">
       <mat-icon>arrow_back</mat-icon>
-      <span>Nazad na početnu stranicu</span>
+      <span>{{'NazadNaPocetnu'|transloco}}</span>
     </div>
   </button>
   <div class="options">
-    <button mat-button disabled class="sectionName" id="opcenito">OPĆENITO</button>
-    <button mat-button class="buttonEnableNav" id="mojProfilButton" routerLink="mojProfil" routerLinkActive="active">Moj Profil</button>
-    <button *ngIf="ovajKorisnik.korisnik.uloga === 'Vlasnik'" mat-button class="buttonEnableNav" routerLink="mojiObjekti">Moji objekti</button>
-    <button *ngIf="ovajKorisnik.korisnik.uloga !== 'Admin'" mat-button class="buttonEnableNav" routerLink="mojeRezervacije">Moje rezervacije</button>
-    <button *ngIf="ovajKorisnik.korisnik.uloga !== 'Admin'" mat-button class="buttonEnableNav" routerLink="mojeRecenzije">Moje recenzije</button>
-    <button *ngIf="ovajKorisnik.korisnik.uloga === 'Gost'" mat-button class="buttonEnableNav" routerLink="kreditnaKartica">Povežite kreditnu karticu</button>
-    <button *ngIf="ovajKorisnik.korisnik.uloga === 'Admin'" mat-button class="buttonEnableNav" routerLink="zahtjevi">Zahtjevi za odobravanje hotela</button>
-    <button *ngIf="ovajKorisnik.korisnik.uloga === 'Admin'" mat-button class="buttonEnableNav" routerLink="pitanjaAdmin">Postavljena pitanja</button>
-    <button *ngIf="ovajKorisnik.korisnik.uloga === 'Gost'" mat-button class="buttonEnableNav" routerLink="pitanjaGost">Moja pitanja</button>
-
-    <!-- <button *ngIf="ovajKorisnik.korisnik.uloga === 'Vlasnik'" mat-button class="buttonEnableNav" color="primary" routerLink="/dodajHotel">Dodaj hotel</button> -->
+    <button mat-button disabled class="sectionName" id="opcenito">{{'Opcenito'|transloco}}</button>
+    <button mat-button class="buttonEnableNav" id="mojProfilButton" routerLink="mojProfil" routerLinkActive="active">{{'MojProfil'|transloco}}</button>
+    <button *ngIf="ovajKorisnik.korisnik.uloga === 'Vlasnik'" mat-button class="buttonEnableNav" routerLink="mojiObjekti">{{'MojiObjekti'|transloco}}</button>
+    <button *ngIf="ovajKorisnik.korisnik.uloga !== 'Admin'" mat-button class="buttonEnableNav" routerLink="mojeRezervacije">{{'MojeRezervacije'|transloco}}</button>
+    <button *ngIf="ovajKorisnik.korisnik.uloga !== 'Admin'" mat-button class="buttonEnableNav" routerLink="mojeRecenzije">{{'MojeRecenzije'|transloco}}</button>
+    <button *ngIf="ovajKorisnik.korisnik.uloga === 'Gost'" mat-button class="buttonEnableNav" routerLink="kreditnaKartica">{{'PovežiteKreditnuKarticu'|transloco}}</button>
+    <button *ngIf="ovajKorisnik.korisnik.uloga === 'Admin'" mat-button class="buttonEnableNav" routerLink="zahtjevi">{{'ZahtjeviZaOdobravanjeHotela'|transloco}}</button>
+    <button *ngIf="ovajKorisnik.korisnik.uloga === 'Admin'" mat-button class="buttonEnableNav" routerLink="pitanjaAdmin">{{'PostavljenaPitanja'|transloco}}</button>
+    <button *ngIf="ovajKorisnik.korisnik.uloga === 'Gost'" mat-button class="buttonEnableNav" routerLink="pitanjaGost">{{'MojaPitanja'|transloco}}</button>
+    <button *ngIf="ovajKorisnik.korisnik.uloga === 'Vlasnik'" mat-button class="buttonEnableNav" routerLink="pitanjaVlasnik">{{'Pitanja'|transloco}}</button>
     <br>
-    <button mat-button disabled class="sectionName">POSTAVKE</button>
-    <button mat-button class="buttonEnableNav" routerLink="promijeniLozinku">Promijeni lozinku</button>
-    <button mat-button class="buttonEnableNav" (click)="Logout()">Odjavi se</button>
+    <button mat-button disabled class="sectionName">{{'Postavke'|transloco}}</button>
+    <button mat-button class="buttonEnableNav" routerLink="promijeniLozinku">{{'PromijeniLozinku'|transloco}}</button>
+    <button mat-button class="buttonEnableNav" (click)="Logout()">{{'OdjaviSe'|transloco}}</button>
+    <br>
+    <button mat-button disabled class="sectionName">{{'Jezik'|transloco}}</button>
+    <app-select-language id="select" [side]="true"></app-select-language>
   </div>
 </div>

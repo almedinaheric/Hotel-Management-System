@@ -16,5 +16,6 @@ namespace eRezervacija.Core.ViewModels
 		public int BrojGostiju{ get; set; }
 		public int BrojDjece { get; set; }
 		public float Cijena { get; set; }
-	}
+        public Guid BrojRezervacije { get; set; }
+    }
 }

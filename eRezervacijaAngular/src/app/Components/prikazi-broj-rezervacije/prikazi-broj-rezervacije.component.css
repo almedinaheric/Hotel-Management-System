@@ -1,0 +1,33 @@
+.wrapper{
+    padding: 1rem;
+}
+
+#form{
+    width: 100%;
+}
+
+#actions{
+    display: flex;
+    justify-content: space-between;
+    padding: 0 1.5rem;
+}
+
+#icon{
+    cursor: pointer;
+}
+
+#content{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.tooltip{
+    display: flex;
+    justify-content: flex-end;
+    padding: 0 1.5rem;
+}
+
+#content h4{
+    margin: 0;
+}

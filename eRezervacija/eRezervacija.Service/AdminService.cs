@@ -6,6 +6,7 @@ namespace eRezervacija.Service
 	public interface IAdminService
 	{
 		void Add(Admin obj);
+		void Update(Admin obj);
 		IEnumerable<Admin> GetAll();
 		Admin GetByKorisnikID(int id);
 	}
@@ -29,6 +30,11 @@ namespace eRezervacija.Service
 		public Admin GetByKorisnikID(int id)
 		{
 			return adminRepository.GetAll().Where(k => k.KorisnikID == id).FirstOrDefault();
+		}
+
+		public void Update(Admin obj)
+		{
+			adminRepository.Update(obj);
 		}
 	}
 }

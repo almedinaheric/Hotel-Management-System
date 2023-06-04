@@ -44,7 +44,7 @@
 }
 
 .hotelDetaljiContent{
-  padding: 2rem 1rem 2rem 1rem;
+  padding: 2rem 1rem 0rem 1rem;
 }
 
 .adresaGradDrzava{
@@ -121,15 +121,16 @@ img{
   font-weight: 600;
 }
 
-.recenzijeContainer {
+.recenzijeContainer, .pitanjaContainer  {
   display: flex;
   flex-direction: row;
   overflow-x: scroll;
   scroll-behavior: smooth;
   align-items: center;
+  gap: 1rem;
 }
 
-.recenzije {
+.recenzije,.pitanja {
   display: flex;
   flex-direction: row;
   gap: 1rem;
@@ -138,11 +139,11 @@ img{
   max-width:100%;
 }
 
-.rec h2{ 
+.rec h2, .butonpitanje h2, .availability h2{ 
   color: var(--dim-grey);
   font-size: 24px;
   font-weight: 600;
-  margin: 2rem 0;
+  margin: 0;
 }
 
 .amenities h2{
@@ -151,12 +152,23 @@ img{
   font-weight: 600;
 }
 
+.availability h2{
+  margin: 2rem 0rem;
+}
+
 mat-icon-button{
   position: absolute;
   bottom: 0;
 }
 
-#nemaRec{
+.buttonrec, .butonpitanje{
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  margin: 2rem 0;
+}
+
+#nemaRec, #nemaPit{
   color: var(--coral);
 }
 
@@ -176,6 +188,20 @@ mat-icon-button{
 .grid-item {
   width: 100%;
   background-color: #f2f2f2;
+}
+
+.dialog{
+  padding: 1rem;
+}
+
+#form{
+  width: 100%;
+}
+
+#actions{
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1.5rem;
 }
 
 @media screen and (min-width: 1000px) and (max-width: 1300px){

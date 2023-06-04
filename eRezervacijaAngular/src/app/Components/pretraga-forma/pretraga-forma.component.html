@@ -2,12 +2,12 @@
   <mat-card-content>
     <div class="pretraga-form">
       <div class="pretraga-form-group formGroup1">
-        <app-select-box id="grad" label="Odaberite grad" [passedArray]="gradovi" [NameOrId]="'name'" [formControlInput]="searchTerm"></app-select-box>
+        <app-select-box id="grad" label="{{'OdaberiteGrad'|transloco}}" [passedArray]="gradovi" [NameOrId]="'name'" [formControlInput]="searchTerm"></app-select-box>
         <mat-form-field appearance="fill" class="pretraga-date-field">
-          <mat-label>Odaberite datum</mat-label>
+          <mat-label>{{'OdaberiteDatum'|transloco}}</mat-label>
           <mat-date-range-input [rangePicker]="picker">
-            <input [(ngModel)]="dateStart" matStartDate placeholder="Datum prijave">
-            <input [(ngModel)]="dateEnd" matEndDate placeholder="Datum odjave">
+            <input [(ngModel)]="dateStart" matStartDate placeholder="{{'CheckIn'|transloco}}">
+            <input [(ngModel)]="dateEnd" matEndDate placeholder="{{'CheckOut'|transloco}}">
           </mat-date-range-input>
           <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-date-range-picker #picker></mat-date-range-picker>
@@ -15,19 +15,19 @@
       </div>
       <div class="pretraga-form-group">
         <mat-form-field class="pretraga-guests-field">
-          <mat-label>Broj odraslih osoba</mat-label>
-          <input matInput type="number" placeholder="Broj gostiju" [(ngModel)]="numGuests" />
+          <mat-label>{{'BrojOdraslihOsoba'|transloco}}</mat-label>
+          <input matInput type="number" placeholder="{{'BrojGostiju'|transloco}}" [(ngModel)]="numGuests" />
         </mat-form-field>
         <mat-form-field class="pretraga-children-field">
-          <mat-label>Broj djece</mat-label>
-          <input matInput type="number" placeholder="Do 5 godina" [(ngModel)]="numChildren"/>
+          <mat-label>{{'BrojDjece'|transloco}}</mat-label>
+          <input matInput type="number" placeholder="{{'Do5Godina'|transloco}}" [(ngModel)]="numChildren"/>
         </mat-form-field>
         <mat-form-field class="pretraga-rooms-field">
-          <mat-label>Broj soba</mat-label>
-          <input matInput type="number" placeholder="Broj soba" [(ngModel)]="numRooms"/>
+          <mat-label>{{'BrojSoba'|transloco}}</mat-label>
+          <input matInput type="number" placeholder="{{'BrojSoba'|transloco}}" [(ngModel)]="numRooms"/>
         </mat-form-field>
       </div>
-      <button mat-raised-button color="primary" class="pretraga-button" (click)="Search()">Pretraži</button>
+      <button mat-raised-button color="primary" class="pretraga-button" (click)="Search()">{{'Pretrazi'|transloco}}</button>
     </div>
   </mat-card-content>
 </mat-card>

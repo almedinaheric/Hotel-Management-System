@@ -58,6 +58,13 @@ namespace eRezervacija.Repository.Migrations
                     b.Property<string>("ipAdresa")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("twoFCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("twoFJelOtkljucano")
+                        .HasColumnType("bit");
+
                     b.HasKey("Id");
 
                     b.HasIndex("KorisnikID");
@@ -288,6 +295,42 @@ namespace eRezervacija.Repository.Migrations
                     b.ToTable("DetaljiHotela");
                 });
 
+            modelBuilder.Entity("eRezervacija.Core.HotelPitanja", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime?>("DatumOdgovoreno")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("GostId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("HotelId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("OdgovorPitanja")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Odgovoreno")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("TekstPitanja")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GostId");
+
+                    b.HasIndex("HotelId");
+
+                    b.ToTable("HotelPitanja");
+                });
+
             modelBuilder.Entity("eRezervacija.Core.Korisnik", b =>
                 {
                     b.Property<int>("Id")
@@ -321,6 +364,9 @@ namespace eRezervacija.Repository.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("PasswordResetToken")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Prezime")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -336,6 +382,9 @@ namespace eRezervacija.Repository.Migrations
                     b.Property<string>("Username")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("isAktiviran")
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
@@ -459,6 +508,28 @@ namespace eRezervacija.Repository.Migrations
                     b.ToTable("PlanoviOtkazivanja");
                 });
 
+            modelBuilder.Entity("eRezervacija.Core.RasporedSoba", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("Datum")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("Rezervisana")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("SobaId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("RasporedSoba");
+                });
+
             modelBuilder.Entity("eRezervacija.Core.Recenzija", b =>
                 {
                     b.Property<int>("Id")
@@ -506,6 +577,9 @@ namespace eRezervacija.Repository.Migrations
                     b.Property<int>("BrojOdraslih")
                         .HasColumnType("int");
 
+                    b.Property<Guid>("BrojRezervacije")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<float>("Cijena")
                         .HasColumnType("real");
 
@@ -521,11 +595,7 @@ namespace eRezervacija.Repository.Migrations
                     b.Property<int>("GostId")
                         .HasColumnType("int");
 
-                    b.Property<string>("NacinPlacanja")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("NacinPlacanjaId")
+                    b.Property<int?>("NacinPlacanjaId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -693,6 +763,38 @@ namespace eRezervacija.Repository.Migrations
                     b.ToTable("DetaljiSoba");
                 });
 
+            modelBuilder.Entity("eRezervacija.Core.Transakcija", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("BrojRacuna")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<float>("Cijena")
+                        .HasColumnType("real");
+
+                    b.Property<DateTime>("DatumUplate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("HotelId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("KreditnaKarticaId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RezervacijaId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Transakcije");
+                });
+
             modelBuilder.Entity("eRezervacija.Core.Vlasnik", b =>
                 {
                     b.Property<int>("Id")
@@ -807,6 +909,25 @@ namespace eRezervacija.Repository.Migrations
                     b.Navigation("vlasnik");
                 });
 
+            modelBuilder.Entity("eRezervacija.Core.HotelPitanja", b =>
+                {
+                    b.HasOne("eRezervacija.Core.Gost", "gost")
+                        .WithMany()
+                        .HasForeignKey("GostId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("eRezervacija.Core.Hotel", "hotel")
+                        .WithMany()
+                        .HasForeignKey("HotelId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("gost");
+
+                    b.Navigation("hotel");
+                });
+
             modelBuilder.Entity("eRezervacija.Core.Parking", b =>
                 {
                     b.HasOne("eRezervacija.Core.Hotel", "hotel")
@@ -869,9 +990,7 @@ namespace eRezervacija.Repository.Migrations
 
                     b.HasOne("eRezervacija.Core.NacinPlacanja", "nacinPlacanja")
                         .WithMany()
-                        .HasForeignKey("NacinPlacanjaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("NacinPlacanjaId");
 
                     b.Navigation("gost");
 

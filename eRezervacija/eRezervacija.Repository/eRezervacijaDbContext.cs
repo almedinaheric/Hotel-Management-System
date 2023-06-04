@@ -36,6 +36,9 @@ namespace eRezervacija.Repository
         public DbSet<RezervacijaSoba> RezervacijaSobe { get; set; }
         public DbSet<NacinPlacanja> NacinPlacanja { get; set; }
         public DbSet<FAQ> Pitanja { get; set; }
+        public DbSet<HotelPitanja> HotelPitanja { get; set; }
+        public DbSet<RasporedSoba> RasporedSoba { get; set; }
+        public DbSet<Transakcija> Transakcije { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -44,7 +47,7 @@ namespace eRezervacija.Repository
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=localhost;Database=eRezervacijaSveTabeleDodane;Trusted_Connection=false;TrustServerCertificate=true;Integrated security=false; user=sa; password=reallyStrongPwd123; MultipleActiveResultSets=true;");
+            optionsBuilder.UseSqlServer("Server=localhost;Database=ABDFinalna;Trusted_Connection=false;TrustServerCertificate=true;Integrated security=false; user=sa; password=reallyStrongPwd123; MultipleActiveResultSets=true;");
         }
     }
 }

@@ -5,9 +5,13 @@ import {MojConfig} from "../../MojConfig";
 import { Hotel } from 'src/app/Helpers/hotel';
 import { HotelDetalji } from 'src/app/Helpers/hotel';
 import { ViewChild,ElementRef } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 
 import { forkJoin } from 'rxjs';
 import { map,switchMap } from 'rxjs/operators';
+import { PostaviPitanjeComponent } from '../postavi-pitanje/postavi-pitanje.component';
+import { KodZaRecenzijuComponent } from '../kod-za-recenziju/kod-za-recenziju.component';
+import {PreviewRezervacijePopupComponent} from "../preview-rezervacije-popup/preview-rezervacije-popup.component";
 
 @Component({
   selector: 'app-odabrani-hotel',
@@ -29,18 +33,32 @@ export class OdabraniHotelComponent {
   brojRecenzija:any;
   slike:any[]=[];
   dataLoaded:boolean = false;
+  brojPitanja:any;
+  pitanja:any;
+  from:any;
 
-  constructor(private route: ActivatedRoute,private router:Router,private httpklijent: HttpClient){}
+  rezervisiNiz:any;
+  receiveData(data:any){
+    this.rezervisiNiz=data;
+  }
+
+  constructor(private route: ActivatedRoute,private router:Router,private httpklijent: HttpClient,
+    public dialog: MatDialog){}
 
   ngOnInit(): void{
     this.route.params.subscribe(params=>{
       this.hotelId = +params['id'];
+      this.from=params['from'];
     });
     this.fetchHotelPodaci();
   }
 
   NaSearchResults(){
     this.router.navigate(['searchResults']);
+  }
+
+  NaLanding(){
+    this.router.navigate(['landingPage'])
   }
 
   getSlika(s:any){
@@ -74,7 +92,7 @@ export class OdabraniHotelComponent {
       this.httpklijent.get(MojConfig.adresa_servera+'/api/Grad/GetGradaById/'+this.gradId,MojConfig.http_opcije()).subscribe((x:any) => {
         this.grad=x;
         this.drzavaId=this.grad.drzavaID;
-        
+
           this.httpklijent.get(MojConfig.adresa_servera+'/api/Drzava/GetDrzavaById/'+this.drzavaId,MojConfig.http_opcije()).subscribe((x:any) => {
             this.drzava=x;
           });
@@ -85,17 +103,21 @@ export class OdabraniHotelComponent {
         this.dataLoaded=true;
       });
 
+      this.httpklijent.get(MojConfig.adresa_servera+'/api/Hotel/GetOdgovorenaPitanja/'+this.hotelId,MojConfig.http_opcije()).subscribe((x:any)=>{
+        this.pitanja=x;
+        this.brojPitanja=this.pitanja.length;
+      });
     });
-
 
   }
 
-  @ViewChild('recenzije') recenzijediv: ElementRef;
-
-  cardsData = [ /* array of cards data */ ];
+  @ViewChild('recenzijeclass') recenzijediv: ElementRef;
+  @ViewChild('pitanjaclass') pitanjadiv: ElementRef;
 
   scrollLeftDisabled = true;
   scrollRightDisabled = false;
+  scrollLeftDisabledPitanja = true;
+  scrollRightDisabledPitanja = false;
 
   scroll(direction: number) {
     this.recenzijediv.nativeElement.scrollBy({ left: direction * 300, behavior: 'smooth' });
@@ -107,8 +129,45 @@ export class OdabraniHotelComponent {
     this.scrollLeftDisabled = cardsEl.scrollLeft === 0;
     this.scrollRightDisabled = cardsEl.scrollLeft + cardsEl.clientWidth >= cardsEl.scrollWidth;
   }
-  
+
+  scrollPitanja(direction: number) {
+    this.pitanjadiv.nativeElement.scrollBy({ left: direction * 300, behavior: 'smooth' });
+    this.updateScrollButtonsPitanja();
+  }
+
+  updateScrollButtonsPitanja() {
+    const cardsEl = this.pitanjadiv.nativeElement;
+    this.scrollLeftDisabledPitanja = cardsEl.scrollLeft === 0;
+    this.scrollRightDisabledPitanja = cardsEl.scrollLeft + cardsEl.clientWidth >= cardsEl.scrollWidth;
+  }
+
   prosireno(){
     this.expanded=!this.expanded;
+  }
+
+  postaviPitanje(){
+    sessionStorage.setItem('hotelId',this.hotelId);
+    const dialogRef = this.dialog.open(PostaviPitanjeComponent, {
+      width: '40rem'
+    });
+  }
+
+  dodajRecenziju(){
+    sessionStorage.setItem('hotelId',this.hotelId);
+    const dialogRef = this.dialog.open(KodZaRecenzijuComponent, {
+      width: '40rem'
+    });
+  }
+
+  rezervisi(){
+    let prazno=true;
+    for (const sobe of this.rezervisiNiz) {
+      if(sobe.brojSoba>0)
+        prazno=false;
+    }
+    if(prazno) return;
+    sessionStorage.setItem("roomInfo", JSON.stringify(this.rezervisiNiz));
+    sessionStorage.setItem("hotelId", this.hotelId);
+    this.router.navigate(["rezervacija/0"]);
   }
 }

@@ -1,0 +1,53 @@
+.wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.line{
+    background-color: var(--silver);
+    height: 1px;
+    width: 20rem;
+    border-radius: 1rem;
+}
+
+.number{
+    border: 2px solid #808080;
+    padding: 0.5rem 0.8rem;
+    border-radius: 3rem;
+    font-size: medium;
+    font-weight: 400;
+}
+
+.step {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.step h4{
+    margin: 0;
+    font-size: small;
+    font-weight: 500;
+}
+
+#prvi, #drugi, #treciTrue{
+    color: white;
+    background-color: #0071c2;
+    border-color: #0071c2;
+}
+
+.treciStep{
+    color: var(--grey);
+}
+
+.treciTrueStep{
+    color: black;
+}
+
+@media screen and (min-width: 1000px) and (max-width: 1300px){
+    .line{
+       width: 15rem;
+    }
+}

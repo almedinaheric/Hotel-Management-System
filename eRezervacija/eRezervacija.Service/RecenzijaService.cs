@@ -11,6 +11,9 @@ namespace eRezervacija.Service
         IEnumerable<Recenzija> GetAll();
         List<RecenzijaReturnVM> GetByGostId(int gostId);
         List<RecenzijaByHotelReturnVM> GetByHotelId(int hotelId);
+        void RemoveByHotelId(int hotelId);
+        IEnumerable<Recenzija> GetSveByHotelId(int id);
+
     }
     public class RecenzijaService : IRecenzijaService
     {
@@ -63,6 +66,17 @@ namespace eRezervacija.Service
                 listaRecenzijaReturn.Add(recenzijaMap);
             }
             return listaRecenzijaReturn;
+        }
+
+        public IEnumerable<Recenzija> GetSveByHotelId(int hotelId)
+        {
+            return recenzijaRepository.GetAll().Where(x => x.HotelId == hotelId);
+        }
+
+        public void RemoveByHotelId(int hotelId)
+        {
+            var sveRecenzije = GetSveByHotelId(hotelId);
+            recenzijaRepository.RemoveRange(sveRecenzije);
         }
     }
 }

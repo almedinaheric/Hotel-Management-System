@@ -9,9 +9,10 @@ export interface AutentifikacijaToken{
   gost: object;
   admin: object;
   vlasnik: object;
-  korisnik:object;
+  korisnik: Korisnik;
   korisnikID: number;
   ipAdresa: string;
+  twoFJelOtkljucano: boolean;
 }
 export interface Korisnik {
   id: number;
@@ -25,6 +26,7 @@ export interface Korisnik {
   username: string;
   datumKreiranja: Date;
   datumPromjene: Date;
+  isAktiviran: boolean;
 }
 export class Gost {
   id: number;

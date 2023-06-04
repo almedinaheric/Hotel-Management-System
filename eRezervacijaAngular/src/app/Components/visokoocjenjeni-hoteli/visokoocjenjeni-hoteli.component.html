@@ -4,7 +4,7 @@
   
   <div class="wrapper" *ngIf="dataLoaded">
     <div class="jedanGrad" *ngFor="let hotel of hoteli | slice:0:4">
-        <mat-card>
+        <mat-card (click)="logujId(hotel.id)">
           <img src="{{getSlika(hotel)}}" alt="{{ hotel.naziv }}" />
           <mat-card-content>
             <h2>{{ hotel.naziv }}</h2>

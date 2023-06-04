@@ -1,0 +1,14 @@
+<div class="wrapper">
+    <h2 id="title" mat-dialog-title>{{'PodaciRezervacije'|transloco}}</h2>
+    <mat-dialog-content>
+        <p>{{'BrojRezervacijeNaProfilu'|transloco}}.</p>
+        <mat-form-field id="form">
+        <textarea id="text" matInput  [(ngModel)]="input" placeholder="{{'BrojRezervacije'|transloco}}"></textarea>
+    </mat-form-field>
+    <mat-error *ngIf="warning">{{WarningContent}}</mat-error>
+    </mat-dialog-content>
+    <mat-dialog-actions id="actions">
+      <button mat-button (click)="dialogRef.close()">{{'Odustani'|transloco}}</button>
+      <button mat-raised-button color="primary" (click)="dodajRecenziju()">{{'Potvrdi'|transloco}}</button>
+    </mat-dialog-actions>
+</div>

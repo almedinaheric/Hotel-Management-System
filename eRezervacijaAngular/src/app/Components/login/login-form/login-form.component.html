@@ -1,20 +1,22 @@
 <mat-card class="card">
   <mat-card-header class="card-header">
-    <button mat-icon-button class="close" routerLink="/">
+    <button mat-icon-button class="close" routerLink="/pocetna">
       <mat-icon>close</mat-icon>
     </button>
-    <mat-card-title class="card-title">Log In</mat-card-title>
-    <mat-card-subtitle class="card-subtitle">as hotel {{OwnerGuestAdmin}}</mat-card-subtitle>
+    <mat-card-title class="card-title">{{'login'|transloco}}</mat-card-title>
+    <mat-card-subtitle *ngIf="OwnerGuestAdmin=='Guest'" class="card-subtitle">{{'asHotelGuest'|transloco}}</mat-card-subtitle>
+    <mat-card-subtitle *ngIf="OwnerGuestAdmin=='Owner'" class="card-subtitle">{{'asHotelOwner'|transloco}}</mat-card-subtitle>
+    <mat-card-subtitle *ngIf="OwnerGuestAdmin=='Admin'" class="card-subtitle">{{'asHotelAdmin'|transloco}}</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content class="card-content">
-      <app-input-field class="card-content-items username" id="username" label="Username" [input]=username></app-input-field>
+      <app-input-field class="card-content-items username" id="username" label="{{'Username'|transloco}}" [input]=username></app-input-field>
       <div class="password-div card-content-items">
-        <app-password-field class="card-content-items password" id="password" label="Password" [password]=password></app-password-field>
-        <a class="forgot-password" href="#">Forgot password?</a>
+        <app-password-field class="card-content-items password" id="password" label="{{'Password'|transloco}}" [password]=password></app-password-field>
+        <a class="forgot-password" (click)="forgotPass()">{{'forgotPassword'|transloco}}</a>
       </div>
-      <button class="login-button card-content-items" mat-raised-button color="primary" (click)="Login()">Login</button>
-      <a class="register-link" *ngIf="OwnerGuestAdmin=='owner'" [routerLink]="['/registerVlasnik']">Don't have an account? Sign Up!</a>
-      <a class="register-link" *ngIf="OwnerGuestAdmin=='guest'" [routerLink]="['/registerGost']">Don't have an account? Sign Up!</a>
-      <a class="register-link" *ngIf="OwnerGuestAdmin=='admin'" [routerLink]="['/registerAdmin']">Don't have an account? Sign Up!</a>
+      <button class="login-button card-content-items" mat-raised-button color="primary" (click)="Login()">{{'login'|transloco}}</button>
+      <a class="register-link" *ngIf="OwnerGuestAdmin=='Owner'" [routerLink]="['/registerVlasnik']">{{'noAccount'|transloco}}</a>
+      <a class="register-link" *ngIf="OwnerGuestAdmin=='Guest'" [routerLink]="['/registerGost']">{{'noAccount'|transloco}}</a>
+      <a class="register-link" *ngIf="OwnerGuestAdmin=='Admin'" [routerLink]="['/registerAdmin']">{{'noAccount'|transloco}}</a>
   </mat-card-content>
-</mat-card> 
+</mat-card>

@@ -45,6 +45,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "MailKit": {
+              "target": "Package",
+              "version": "[4.0.0, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[7.0.1, )"
@@ -64,6 +68,10 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[7.0.1, )"
+            },
+            "MimeKit": {
+              "target": "Package",
+              "version": "[4.0.0, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
@@ -127,6 +135,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "MailKit": {
+              "target": "Package",
+              "version": "[4.0.0, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[7.0.1, )"
@@ -146,6 +158,10 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[7.0.1, )"
+            },
+            "MimeKit": {
+              "target": "Package",
+              "version": "[4.0.0, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
@@ -210,6 +226,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "MailKit": {
+              "target": "Package",
+              "version": "[4.0.0, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[7.0.1, )"
@@ -229,6 +249,10 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[7.0.1, )"
+            },
+            "MimeKit": {
+              "target": "Package",
+              "version": "[4.0.0, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
@@ -296,6 +320,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "MailKit": {
+              "target": "Package",
+              "version": "[4.0.0, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[7.0.1, )"
@@ -315,6 +343,10 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[7.0.1, )"
+            },
+            "MimeKit": {
+              "target": "Package",
+              "version": "[4.0.0, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",

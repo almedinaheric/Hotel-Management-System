@@ -1,0 +1,37 @@
+<mat-card class="card">
+    <mat-card-header class="card-header">
+        <mat-card-title class="card-title">{{'Placanje'|transloco}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <div class="nacinUplate">
+            <h4 id="nacinplacanjah4">{{'KakoZelitePlatiti'|transloco}}</h4>
+            <div class="izborUplate">
+                <mat-card class="kartica" [class.clicked]="kartica" (click)="karticom()">
+                    <h4> {{'Kartica'|transloco}}</h4>
+                </mat-card>
+                <mat-card class="gotovina" [class.clicked]="gotovina" (click)="gotovinom()">
+                    <h4> {{'Gotovina'|transloco}}</h4>
+                </mat-card>
+            </div>
+            <div class="izborKartice" *ngIf="kartica">
+                <div class="staraKartica" [class.nova]="!promijeni">
+                    <h4>{{'VasaKartica'|transloco}}</h4>
+                    <app-password-field class="input" [password]="brojKartice" label="{{'BrojKartice'|transloco}}"></app-password-field>
+                    <app-input-field class="input" [input]="datumIsteka" label="{{'DatumIsteka'|transloco}}"></app-input-field>
+                    <app-password-field class="input" [password]="CVV" label="CVV"></app-password-field>
+                    <button mat-stroked-button color="primary" (click)="buttonContent()">{{tekst}}</button>
+                </div>
+                <div class="novaKartica" *ngIf="promijeni" >
+                    <h4>{{'ZamijeniKarticu'|transloco}}</h4>
+                    <app-povezi-kreditnu-karticu [Nova]="true"></app-povezi-kreditnu-karticu>
+                    <p id="hint">{{'HintNakonDodavanja'|transloco}}</p>
+                </div>
+            </div>
+        </div>
+    </mat-card-content>
+    <mat-card-actions class="actions">
+        <button mat-raised-button color="primary" routerLink="/rezervacija/0">{{'Nazad'|transloco}}</button>
+        <button mat-raised-button color="primary" [disabled]="!disejblujPlacanje" (click)="dodajTransakciju()">{{'Plati'|transloco}}</button>
+    </mat-card-actions>
+
+</mat-card>

@@ -2,11 +2,10 @@
 using eRezervacija.API.ViewModels;
 using eRezervacija.Core;
 using eRezervacija.Service;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using eRezervacija.Repository;
 using eRezervacija.Core.Autentikacija;
 using eRezervacija.Core.ViewModels;
+using System.Web;
 
 namespace eRezervacija.API.Controllers
 {
@@ -25,10 +24,17 @@ namespace eRezervacija.API.Controllers
 		IRezervacijaSobaService rezervacijaSobaService;
 		IHotelService hotelService;
 		IFAQService faqService;
+		IRasporedSobaService rasporedSobaService;
+		ISobaService sobaService;
+		ITransakcijaService transakcijaService;
+		INacinPlacanjaService nacinPlacanjaService;
+		IAuthTokenService authTokenService;
 
 		public KorisnikController(IKorisnikService korisnikService, IGostService gostService, IAuthTokenService tokenService,
 			IAdminService adminService, IVlasnikService vlasnikService, IKarticaService karticaService, IRecenzijaService recenzijaService,
-			IRezervacijaService rezervacijaService, IRezervacijaSobaService rezervacijaSobaService,IHotelService hotelService, IFAQService faqService)
+			IRezervacijaService rezervacijaService, IRezervacijaSobaService rezervacijaSobaService, IHotelService hotelService, IFAQService faqService,
+			IRasporedSobaService rasporedSobaService, ITransakcijaService transakcijaService, ISobaService sobaService, IAuthTokenService authTokenService, INacinPlacanjaService nacinPlacanjaService)
+
 		{
 			this.korisnikService = korisnikService;
 			this.gostService = gostService;
@@ -41,6 +47,31 @@ namespace eRezervacija.API.Controllers
 			this.rezervacijaSobaService = rezervacijaSobaService;
 			this.hotelService = hotelService;
 			this.faqService = faqService;
+			this.rasporedSobaService = rasporedSobaService;
+			this.transakcijaService = transakcijaService;
+			this.sobaService = sobaService;
+			this.nacinPlacanjaService = nacinPlacanjaService;
+			this.authTokenService = authTokenService;
+		}
+
+		[HttpGet("{kod}")]
+		public ActionResult<AuthTokenExtension.LoginInformacije> Otkljucaj(string kod)
+		{
+			var korisnickiNalog = HttpContext.GetLoginInfo().korisnickiNalog;
+
+			if (korisnickiNalog == null)
+			{
+				return BadRequest("Korisnik nije logiran");
+			}
+
+			var token = authTokenService.Get(kod, korisnickiNalog.Id);
+			if (token != null)
+			{
+				authTokenService.Otkljucaj(token);
+				return Ok(new AuthTokenExtension.LoginInformacije(token));
+			}
+
+			return BadRequest("Pogresan URL");
 		}
 
 		[HttpPost]
@@ -54,7 +85,7 @@ namespace eRezervacija.API.Controllers
 				Ime = gost.Ime,
 				Prezime = gost.Prezime,
 				Spol = gost.Spol,
-				Datum_rodjenja = gost.DatumRodjenja,
+				Datum_rodjenja = gost.DatumRodjenja.AddDays(1),
 				Email = gost.Email,
 				Broj_telefona = gost.BrojTelefona,
 				Username = gost.Username,
@@ -71,6 +102,30 @@ namespace eRezervacija.API.Controllers
 			gostService.Add(noviGost);
 			return noviGost;
 		}
+		[HttpPut("{korisnikId}")]
+		public ActionResult<Gost> UpdateGost(int korisnikId, RegistracijaGostVM podaci)
+		{
+			var updateKorisnik = korisnikService.GetByKorisnikID(korisnikId);
+			var updateGost = gostService.GetByKorisnikID(korisnikId);
+
+			if (updateKorisnik == null) { return NotFound(); }
+			if (updateGost == null) { return NotFound(); }
+
+			updateKorisnik.Uloga = "Gost";
+			updateKorisnik.Ime = podaci.Ime;
+			updateKorisnik.Prezime = podaci.Prezime;
+			updateKorisnik.Spol = podaci.Spol;
+			updateKorisnik.Datum_rodjenja = podaci.DatumRodjenja.AddDays(1);
+			updateKorisnik.Email = podaci.Email;
+			updateKorisnik.Broj_telefona = podaci.BrojTelefona;
+			updateKorisnik.DatumPromjene = DateTime.Now;
+			korisnikService.UpdateKorisnik(updateKorisnik);
+
+			updateGost.korisnik = updateKorisnik;
+			gostService.Update(updateGost);
+
+			return updateGost;
+		}
 		[HttpPost]
 		public ActionResult<AuthTokenExtension.LoginInformacije> LoginGost([FromBody] LoginVM x)
 		{
@@ -84,6 +139,7 @@ namespace eRezervacija.API.Controllers
 
 			//generisanje random stringa
 			string randomString = TokenGenerator.Generate(10);
+			string twoFCode = TokenGenerator.Generate(4);
 
 			//dodavanje novog zapisa u tabelu AutentifikacijaToken za taj login i string
 			var noviToken = new AutentifikacijaToken()
@@ -92,8 +148,11 @@ namespace eRezervacija.API.Controllers
 				Vrijednost = randomString,
 				korisnik = logiraniKorisnik,
 				gost = gostService.GetByKorisnikID(logiraniKorisnik.Id),
+				twoFCode = twoFCode,
 			};
 			tokenService.Add(noviToken);
+
+			EmailLog.uspjesnoLogiranKorisnik(noviToken, Request.HttpContext);
 			return new AuthTokenExtension.LoginInformacije(noviToken);
 		}
 		[HttpGet]
@@ -102,7 +161,7 @@ namespace eRezervacija.API.Controllers
 			return gostService.GetAll();
 		}
 
-		
+
 		[HttpPost]
 		public Admin RegistracijaAdmin(RegistracijaAdminVM admin)
 		{
@@ -114,7 +173,7 @@ namespace eRezervacija.API.Controllers
 				Ime = admin.Ime,
 				Prezime = admin.Prezime,
 				Spol = admin.Spol,
-				Datum_rodjenja = admin.DatumRodjenja,
+				Datum_rodjenja = admin.DatumRodjenja.AddDays(1),
 				Email = admin.Email,
 				Broj_telefona = admin.BrojTelefona,
 				Username = admin.Username,
@@ -139,6 +198,7 @@ namespace eRezervacija.API.Controllers
 				return new AuthTokenExtension.LoginInformacije(null);
 			}
 			string randomString = TokenGenerator.Generate(10);
+			string twoFCode = TokenGenerator.Generate(4);
 
 			var noviToken = new AutentifikacijaToken()
 			{
@@ -146,9 +206,36 @@ namespace eRezervacija.API.Controllers
 				Vrijednost = randomString,
 				korisnik = logiraniKorisnik,
 				admin = adminService.GetByKorisnikID(logiraniKorisnik.Id),
+				twoFCode = twoFCode,
 			};
 			tokenService.Add(noviToken);
+
+			EmailLog.uspjesnoLogiranKorisnik(noviToken, Request.HttpContext);
 			return new AuthTokenExtension.LoginInformacije(noviToken);
+		}
+		[HttpPut("{korisnikId}")]
+		public ActionResult<Admin> UpdateAdmin(int korisnikId, RegistracijaAdminVM podaci)
+		{
+			var updateKorisnik = korisnikService.GetByKorisnikID(korisnikId);
+			var updateAdmin = adminService.GetByKorisnikID(korisnikId);
+
+			if (updateKorisnik == null) { return NotFound(); }
+			if (updateAdmin == null) { return NotFound(); }
+
+			updateKorisnik.Uloga = "Admin";
+			updateKorisnik.Ime = podaci.Ime;
+			updateKorisnik.Prezime = podaci.Prezime;
+			updateKorisnik.Spol = podaci.Spol;
+			updateKorisnik.Datum_rodjenja = podaci.DatumRodjenja.AddDays(1);
+			updateKorisnik.Email = podaci.Email;
+			updateKorisnik.Broj_telefona = podaci.BrojTelefona;
+			updateKorisnik.DatumPromjene = DateTime.Now;
+			korisnikService.UpdateKorisnik(updateKorisnik);
+
+			updateAdmin.korisnik = updateKorisnik;
+			adminService.Update(updateAdmin);
+
+			return updateAdmin;
 		}
 		[HttpGet]
 		public IEnumerable<Admin> GetAllAdmin()
@@ -162,14 +249,14 @@ namespace eRezervacija.API.Controllers
 		{
 			if (korisnikService.CheckIfExisting(vlasnik.Username))
 				return null;
-			
+
 			var temp = new Korisnik()
 			{
 				Uloga = "Vlasnik",
 				Ime = vlasnik.Ime,
 				Prezime = vlasnik.Prezime,
 				Spol = vlasnik.Spol,
-				Datum_rodjenja = vlasnik.DatumRodjenja,
+				Datum_rodjenja = vlasnik.DatumRodjenja.AddDays(1),
 				Email = vlasnik.Email,
 				Broj_telefona = vlasnik.BrojTelefona,
 				Username = vlasnik.Username,
@@ -188,40 +275,46 @@ namespace eRezervacija.API.Controllers
 			};
 			vlasnikService.Add(noviVlasnik);
 			return noviVlasnik;
-        }
+		}
 
-        [HttpPost("{korisnikId}")]
-        public ActionResult<Vlasnik> UpdatePodaciMojProfilVlasnik(int korisnikId, MojProfilVlasnikUpdateVM podaci)
+		[HttpPost("{korisnikId}")]
+		public ActionResult<Vlasnik> UpdatePodaciMojProfilVlasnik(int korisnikId, MojProfilVlasnikUpdateVM podaci)
 		{
-            var updateKorisnik = korisnikService.GetByKorisnikID(korisnikId);
-            var updateVlasnik = vlasnikService.GetByKorisnikID(korisnikId);
+			var updateKorisnik = korisnikService.GetByKorisnikID(korisnikId);
+			var updateVlasnik = vlasnikService.GetByKorisnikID(korisnikId);
 
 			if (updateKorisnik == null) { return NotFound(); }
-            if (updateVlasnik == null) { return NotFound(); }
+			if (updateVlasnik == null) { return NotFound(); }
 
-            updateKorisnik.Uloga = "Vlasnik";
-            updateKorisnik.Ime = podaci.Ime; 
-            updateKorisnik.Prezime = podaci.Prezime; 
-            updateKorisnik.Spol = podaci.Spol; 
-            updateKorisnik.Datum_rodjenja = podaci.DatumRodjenja; 
-            updateKorisnik.Email = podaci.Email; 
-            updateKorisnik.Broj_telefona = podaci.BrojTelefona; 
-            updateKorisnik.DatumPromjene = DateTime.Now;
-            korisnikService.UpdateKorisnik(updateKorisnik);
+			updateKorisnik.Uloga = "Vlasnik";
+			updateKorisnik.Ime = podaci.Ime;
+			updateKorisnik.Prezime = podaci.Prezime;
+			updateKorisnik.Spol = podaci.Spol;
+			updateKorisnik.Datum_rodjenja = podaci.DatumRodjenja.AddDays(1);
+			updateKorisnik.Email = podaci.Email;
+			updateKorisnik.Broj_telefona = podaci.BrojTelefona;
+			updateKorisnik.DatumPromjene = DateTime.Now;
+			korisnikService.UpdateKorisnik(updateKorisnik);
 
-            updateVlasnik.korisnik = updateKorisnik;
-            updateVlasnik.BrojBankovnogRacuna = podaci.BrojBankovnogRacuna;
-            updateVlasnik.BrojLicneKarte = podaci.BrojLicneKarte;
-            vlasnikService.UpdateVlasnik(updateVlasnik);
+			updateVlasnik.korisnik = updateKorisnik;
+			updateVlasnik.BrojBankovnogRacuna = podaci.BrojBankovnogRacuna;
+			updateVlasnik.BrojLicneKarte = podaci.BrojLicneKarte;
+			vlasnikService.UpdateVlasnik(updateVlasnik);
 
-            return updateVlasnik;
-        }
+			return updateVlasnik;
+		}
 
-        [HttpPost("{korisnikId}")]
-        public ActionResult<Korisnik> ChangePassword(int korisnikId, ChangePasswordVM password)
+		[HttpGet("{vlasnikId}")]
+		public Vlasnik GetVlasnikByVlasnikId(int vlasnikId)
 		{
-            var updateKorisnik = korisnikService.GetByKorisnikID(korisnikId);
-            if (updateKorisnik == null) { return NotFound(); }
+			return vlasnikService.GetByVlasnikId(vlasnikId);
+		}
+
+		[HttpPost("{korisnikId}")]
+		public ActionResult<Korisnik> ChangePassword(int korisnikId, ChangePasswordVM password)
+		{
+			var updateKorisnik = korisnikService.GetByKorisnikID(korisnikId);
+			if (updateKorisnik == null) { return NotFound(); }
 
 			if (updateKorisnik.Password == password.OldPassword)
 			{
@@ -230,10 +323,46 @@ namespace eRezervacija.API.Controllers
 				return updateKorisnik;
 			}
 
-            return BadRequest("Trenutni password nije tacan.");
-        }
+			return BadRequest("Trenutni password nije tacan.");
+		}
 
-        [HttpPost]
+		[HttpPost("update-password")]
+		public IActionResult UpdateForgotPassword([FromQuery] string token, string password)
+		{
+			var korisnik = korisnikService.GetByPasswordResetToken(token);
+
+			if (korisnik == null)
+			{
+				return NotFound();
+			}
+
+			korisnik.Password = password;
+			korisnikService.UpdateKorisnik(korisnik);
+
+			return Ok();
+		}
+
+
+		[HttpPost]
+		public ActionResult ForgotPassword([FromQuery] string email)
+		{
+			var korisnik = korisnikService.GetByEmail(email);
+
+			if (korisnik == null)
+				return NotFound();
+
+			var token = Guid.NewGuid().ToString();
+			korisnikService.SetPasswordResetToken(korisnik.Id, token);
+
+			var resetPasswordUrl = $"http://localhost:65375/update-password?token={HttpUtility.UrlEncode(token)}";
+			//var emailBody = $"Click this link to reset your password: {resetPasswordUrl}";
+			var emailBody = ResetPasswordEmailBody.EmailBody(resetPasswordUrl, korisnik.Ime, korisnik.Prezime);
+
+			EmailSender.Posalji("yilafi6668@jwsuns.com", "Password Recovery", emailBody, true);
+			return Ok();
+		}
+
+		[HttpPost]
 		public ActionResult<AuthTokenExtension.LoginInformacije> LoginVlasnik([FromBody] LoginVM x)
 		{
 			//provjeriti login
@@ -246,6 +375,7 @@ namespace eRezervacija.API.Controllers
 
 			//generisanje random stringa
 			string randomString = TokenGenerator.Generate(10);
+			string twoFCode = TokenGenerator.Generate(4);
 
 			//dodavanje novog zapisa u tabelu AutentifikacijaToken za taj login i string
 			var noviToken = new AutentifikacijaToken()
@@ -254,8 +384,10 @@ namespace eRezervacija.API.Controllers
 				Vrijednost = randomString,
 				korisnik = logiraniKorisnik,
 				vlasnik = vlasnikService.GetByKorisnikID(logiraniKorisnik.Id),
+				twoFCode = twoFCode
 			};
 			tokenService.Add(noviToken);
+			EmailLog.uspjesnoLogiranKorisnik(noviToken, Request.HttpContext);
 			return new AuthTokenExtension.LoginInformacije(noviToken);
 		}
 		[HttpGet]
@@ -281,7 +413,7 @@ namespace eRezervacija.API.Controllers
 			return korisnikService.GetAll();
 		}
 
-		
+
 		[HttpPost]
 		//[Autorizacija(Admin: false, Vlasnik: false, Gost: true)]
 		public KreditnaKartica PoveziKarticu(int korisnikId, [FromBody] KreditnaKarticaVM kartica)
@@ -313,10 +445,24 @@ namespace eRezervacija.API.Controllers
 		{
 			return gostService.GetByKorisnikID(korisnikId).kartica;
 		}
-		
-		
+
 		[HttpPost]
-		public Recenzija DodajRecenziju([FromBody] RecenzijaAddVM recenzija)
+		public bool CheckIfGuidExists(int hotelId, Guid brojRezervacije)
+		{
+			var rezervacija = rezervacijaService.GetAll().Where(x => x.BrojRezervacije == brojRezervacije).FirstOrDefault();
+			if (rezervacija == null)
+				return false;
+			var sobarezervacija = rezervacijaSobaService.GetByRezervacijaId(rezervacija.Id).FirstOrDefault();
+			var hotelID = sobaService.GetBySobaID(sobarezervacija.SobaID).HotelID;
+			if (hotelID == hotelId)
+				return true;
+			else
+				return false;
+		}
+
+
+		[HttpPost]
+		public Recenzija DodajRecenziju([FromBody] RecenzijaAddVM recenzija, Guid brojRezervacije)
 		{
 			var novaRecenzija = new Recenzija()
 			{
@@ -330,7 +476,7 @@ namespace eRezervacija.API.Controllers
 			var hotel = hotelService.GetByHotelID(recenzija.HotelId);
 			var recenzijeHotela = recenzijaService.GetByHotelId(recenzija.HotelId);
 
-			if(recenzijeHotela!=null && recenzijeHotela.Count() > 0)
+			if (recenzijeHotela != null && recenzijeHotela.Count() > 0)
 			{
 				float sumaOcjena = recenzijeHotela.Sum(x => x.Ocjena);
 				float prosjek = sumaOcjena / recenzijeHotela.Count();
@@ -338,7 +484,7 @@ namespace eRezervacija.API.Controllers
 				hotelService.Update(hotel);
 			}
 
-            return novaRecenzija;
+			return novaRecenzija;
 		}
 
 		[HttpGet]
@@ -347,41 +493,45 @@ namespace eRezervacija.API.Controllers
 			return recenzijaService.GetByGostId(gostId).ToList();
 		}
 
-        [HttpGet]
-        public List<RecenzijaByHotelReturnVM> GetRecenzijeByHotelId(int hotelId)
-        {
-            return recenzijaService.GetByHotelId(hotelId).ToList();
-        }
+		[HttpGet]
+		public List<RecenzijaByHotelReturnVM> GetRecenzijeByHotelId(int hotelId)
+		{
+			return recenzijaService.GetByHotelId(hotelId).ToList();
+		}
 
-        [HttpGet]
+		[HttpGet]
 		public List<Recenzija> GetAllRecenzije()
 		{
 			return recenzijaService.GetAll().ToList();
 		}
 
 		[HttpPost]
-		public Rezervacija RezervisiSmjestaj(RezervacijaAddVM rezervacija)
+		public Rezervacija RezervisiSmjestaj([FromBody] RezervacijaAddVM rezervacija)
 		{
-			var novaRezervacija = new Rezervacija()
+			var novaRezervacija = rezervacijaService.Add(rezervacija);
+
+			foreach (var kombinacija in rezervacija.kombinacije)
 			{
-				GostId = rezervacija.GostId,
-				DatumRezervacije = DateTime.Now,
-				DatumCheckIn = rezervacija.DatumCheckIn,
-				DatumCheckOut = rezervacija.DatumCheckOut,
-				BrojGostiju = rezervacija.BrojGostiju,
-				BrojOdraslih = rezervacija.BrojOdraslih,
-				BrojDjece = rezervacija.BrojDjece,
-				NacinPlacanja = rezervacija.NacinPlacanja,
-				Cijena = rezervacija.Cijena,
-			};
-			var novaRezervacijaSoba = new RezervacijaSoba()
-			{
-				rezervacija = novaRezervacija,
-				SobaID = rezervacija.SobaId
-			};
-			rezervacijaService.Add(novaRezervacija);
-			rezervacijaSobaService.Add(novaRezervacijaSoba);
+				var listaSoba = sobaService.GetSobeByName(kombinacija.Naziv, kombinacija.Broj);
+				foreach (var soba in listaSoba)
+				{
+					var novaRezervacijaSoba = new RezervacijaSoba()
+					{
+						rezervacija = novaRezervacija,
+						SobaID = soba.Id
+					};
+					rezervacijaService.UpdateCijenu(novaRezervacija.Id, soba.UkupnaCijena);
+					rasporedSobaService.Rezervisi(rezervacija.DatumCheckIn, rezervacija.DatumCheckOut, soba.Id);
+					rezervacijaSobaService.Add(novaRezervacijaSoba);
+				}
+			}
 			return novaRezervacija;
+		}
+
+		[HttpPost]
+		public Transakcija DodajTransakciju(TransakcijaAddVM transakcija)
+		{
+			return transakcijaService.AddTransakcija(transakcija);
 		}
 
 		[HttpGet]
@@ -390,17 +540,17 @@ namespace eRezervacija.API.Controllers
 			return rezervacijaService.GetByGostId(gostId).ToList();
 		}
 
-        [HttpGet]
-        public IEnumerable<RezervacijaReturnVM> GetRezervacijeByVlasnikId(int vlasnikId)
-        {
+		[HttpGet]
+		public IEnumerable<RezervacijaReturnVM> GetRezervacijeByVlasnikId(int vlasnikId)
+		{
 			return rezervacijaService.GetByVlasnikHotelaId(vlasnikId);
-        }
+		}
 
-        [HttpGet]
-        public IEnumerable<Rezervacija> GetAllRezervacija()
-        {
-            return rezervacijaService.GetAll();
-        }
+		[HttpGet]
+		public IEnumerable<Rezervacija> GetAllRezervacija()
+		{
+			return rezervacijaService.GetAll();
+		}
 
 		[HttpPost]
 		public FAQ PostaviPitanje(FAQAddVM pitanje)
@@ -415,7 +565,7 @@ namespace eRezervacija.API.Controllers
 		[HttpPut("{pitanjeId}")]
 		public FAQ OdgovoriPitanje(int pitanjeId, string tekstOdgovora)
 		{
-			var pitanjeZaOdgovor=faqService.Find(pitanjeId);
+			var pitanjeZaOdgovor = faqService.Find(pitanjeId);
 			pitanjeZaOdgovor.OdgovorPitanja = tekstOdgovora;
 			pitanjeZaOdgovor.Odgovoreno = true;
 			pitanjeZaOdgovor.DatumOdgovoreno = DateTime.Now;
@@ -427,5 +577,29 @@ namespace eRezervacija.API.Controllers
 		{
 			return faqService.GetNeodgovorenaPitanja();
 		}
-    }
+
+
+		[HttpPost]
+		public NacinPlacanja AddNacinPlacanja(NacinPlacanja nacin)
+		{
+			var noviNacin = new NacinPlacanja()
+			{
+				Opis = nacin.Opis
+			};
+			nacinPlacanjaService.Add(noviNacin);
+			return noviNacin;
+		}
+
+		[HttpGet]
+		public IEnumerable<NacinPlacanja> GetAllNacinPlacanja()
+		{
+			return nacinPlacanjaService.GetAll();
+		}
+
+		[HttpGet("{nacinId}")]
+		public NacinPlacanja GetNacinPlacanjaById(int nacinId)
+		{
+			return nacinPlacanjaService.GetByNacinPlacanjaId(nacinId);
+		}
+	}
 }

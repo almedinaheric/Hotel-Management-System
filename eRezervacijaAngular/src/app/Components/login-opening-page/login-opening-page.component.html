@@ -1,6 +1,7 @@
 <div class="wrapper">
-    <h1 class="wrapper-content">Log in as Hotel <label>{{OwnerOrGuest}}</label></h1>
-    <button [routerLink]="OwnerOrGuest === 'Owner' ? 'loginVlasnik' :'loginGost'" class="wrapper-content loginBtn" mat-raised-button color="primary">Log in</button>
-    <a class="wrapper-content singupBtn" *ngIf="OwnerOrGuest==='Owner'" [routerLink]="'registerVlasnik'">Don't have an account? Sign up!</a>
-    <a class="wrapper-content singupBtn" *ngIf="OwnerOrGuest==='Guest'" [routerLink]="'registerGost'">Don't have an account? Sign up!</a>
+    <h1 *ngIf="OwnerOrGuest==='Owner'" class="wrapper-content">{{'loginAsHotelOwner'| transloco }}</h1>
+    <h1 *ngIf="OwnerOrGuest==='Guest'" class="wrapper-content">{{'loginAsHotelGuest'| transloco }}</h1>
+    <button [routerLink]="OwnerOrGuest === 'Owner' ? '/loginVlasnik' :'/loginGost'" class="wrapper-content loginBtn" mat-raised-button color="primary">{{'login'|transloco}}</button>
+    <a class="wrapper-content singupBtn" *ngIf="OwnerOrGuest==='Owner'" [routerLink]="'/registerVlasnik'">{{'noAccount'|transloco}}</a>
+    <a class="wrapper-content singupBtn" *ngIf="OwnerOrGuest==='Guest'" [routerLink]="'/registerGost'">{{'noAccount'|transloco}}</a>
 </div>

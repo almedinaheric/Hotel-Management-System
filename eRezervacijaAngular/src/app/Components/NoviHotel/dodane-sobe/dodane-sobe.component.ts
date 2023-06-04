@@ -6,7 +6,6 @@ import { Observable } from 'rxjs';
 import { groupBy, map, mergeMap, toArray } from 'rxjs/operators';
 import { HotelDataService } from 'src/app/Helpers/hotel-data.service';
 
-
 @Component({
   selector: 'app-dodane-sobe',
   templateUrl: './dodane-sobe.component.html',
@@ -30,7 +29,6 @@ export class DodaneSobeComponent {
     if(confirm('Jeste li sigurni da zelite izbrisati sobu?')==true){
       this.brisanjeUToku=true;
       this.httpklijent.delete(MojConfig.adresa_servera+'/api/Soba/DeleteSobaById/'+roomId,MojConfig.http_opcije()).subscribe((x:any)=>{
-        console.log("obrisana soba ", x);
         location.reload();
         this.brisanjeUToku=false;
       });

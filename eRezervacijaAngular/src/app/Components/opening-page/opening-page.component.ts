@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { LoginOpeningPageComponent } from '../login-opening-page/login-opening-page.component';
 
 @Component({
   selector: 'app-opening-page',

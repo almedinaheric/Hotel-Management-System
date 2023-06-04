@@ -91,3 +91,8 @@
 /Users/almedinaheric/Desktop/webapp/eRezervacija/eRezervacija.API/obj/Debug/net6.0/eRezervacija.API.pdb
 /Users/almedinaheric/Desktop/webapp/eRezervacija/eRezervacija.API/obj/Debug/net6.0/eRezervacija.API.genruntimeconfig.cache
 /Users/almedinaheric/Desktop/webapp/eRezervacija/eRezervacija.API/obj/Debug/net6.0/ref/eRezervacija.API.dll
+/Users/almedinaheric/Desktop/webapp/eRezervacija/eRezervacija.API/bin/Debug/net6.0/BouncyCastle.Cryptography.dll
+/Users/almedinaheric/Desktop/webapp/eRezervacija/eRezervacija.API/bin/Debug/net6.0/MailKit.dll
+/Users/almedinaheric/Desktop/webapp/eRezervacija/eRezervacija.API/bin/Debug/net6.0/MimeKit.dll
+/Users/almedinaheric/Desktop/webapp/eRezervacija/eRezervacija.API/bin/Debug/net6.0/System.Security.Cryptography.Pkcs.dll
+/Users/almedinaheric/Desktop/webapp/eRezervacija/eRezervacija.API/bin/Debug/net6.0/runtimes/win/lib/net6.0/System.Security.Cryptography.Pkcs.dll

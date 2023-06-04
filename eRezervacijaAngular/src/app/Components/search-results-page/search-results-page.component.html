@@ -5,30 +5,30 @@
       <button mat-button (click)="NaLandingPage()">
         <div class="navigation">
           <mat-icon>arrow_back</mat-icon>
-          <span>Nazad na početnu stranicu</span>
+          <span>{{'NazadNaPocetnu'|transloco}}</span>
         </div>
       </button>
-      <h3>FILTRIRAJ PO:</h3>
+      <h3>{{'FiltrirajPo'|transloco}}</h3>
       <div class="filterZvjezdice">
-        <p>Broj zvjezdica</p>
+        <p>{{'BrojZvjezdica'|transloco}}</p>
         <form [formGroup]="zvjezdiceForm" class="checkboxform">
           <mat-checkbox *ngFor="let checkBox of zvjezdiceCheckBoxes" [formControl]="checkBox.control">{{ checkBox.label }}</mat-checkbox>
         </form>
       </div>
       <div class="filterUdaljenost">
-        <p>Udaljenost od centra grada</p>
+        <p>{{'UdaljenostOdCentraGrada'|transloco}}</p>
         <form [formGroup]="udaljenostForm" class="checkboxform">
           <mat-checkbox *ngFor="let checkBox of udaljenostCheckBoxes" [formControl]="checkBox.control">{{ checkBox.label }}</mat-checkbox>
         </form>
       </div>
       <div class="filterOcjena">
-        <p>Prosjecna ocjena hotela</p>
+        <p>{{'ProsjecnaOcjenaHotela'|transloco}}</p>
         <form [formGroup]="ocjenaForm" class="checkboxform">
           <mat-checkbox *ngFor="let checkBox of ocjenaCheckBoxes" [formControl]="checkBox.control">{{ checkBox.label }}</mat-checkbox>
         </form>
       </div>
-      <button mat-raised-button color="primary" id="filtrirajbtn" (click)="Filtriraj()">Filtriraj</button>
-      <button mat-stroked-button id="reset" (click)="ResetFilter()">Reset Filters</button>
+      <button mat-raised-button color="primary" id="filtrirajbtn" (click)="Filtriraj()">{{'Filtriraj'|transloco}}</button>
+      <button mat-stroked-button id="reset" (click)="ResetFilter()">{{'PonistiFiltere'|transloco}}</button>
     </div>
     <div class="resultsSide">
       <div class="searchResults" *ngFor="let result of hotelsSearched">

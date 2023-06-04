@@ -23,10 +23,11 @@ namespace eRezervacija.Core
         public int BrojGostiju { get; set; }
         public int BrojOdraslih { get; set; }
         public int BrojDjece { get; set; }
-        public string NacinPlacanja { get; set; }   
+        //public string NacinPlacanja { get; set; }   
         [ForeignKey("NacinPlacanjaId")]
-        public NacinPlacanja nacinPlacanja { get; set; }
-        public int NacinPlacanjaId { get; set; }
+        public NacinPlacanja? nacinPlacanja { get; set; }
+        public int? NacinPlacanjaId { get; set; }
         public float Cijena { get; set; }
+        public Guid BrojRezervacije { get; set; }
     }
 }

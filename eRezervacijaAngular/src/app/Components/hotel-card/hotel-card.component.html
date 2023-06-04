@@ -10,7 +10,7 @@
       </div>
     </div>
     <div class="gradUdaljenost">
-      <p>Udaljenost od centra grada {{udaljenost}}km</p>
+      <p>{{'UdaljenostOdCentraGrada'|transloco}} {{udaljenost}}km</p>
     </div>
     <div class="opis">
       <p id="opis">{{description.split(' ').splice(0,42).join(' ') + '...'}}</p>
@@ -20,6 +20,6 @@
     <div class="rating">
       <p id="rating">{{rating}}</p>
     </div>
-    <button mat-raised-button color="primary" (click)="openHotelDetails(hotelId)">Check availability</button>
+    <button mat-raised-button color="primary" (click)="openHotelDetails(hotelId)">{{'ProvjeriDostupnost'|transloco}}</button>
   </div>
 </div>

@@ -6,27 +6,26 @@
     <app-pretraga-forma id="pretraga-form"></app-pretraga-forma>
 
     <div class="destinacije">
-      <h1>Popularne destinacije</h1>
+      <h1>{{'PopularneDestinacije'|transloco}}</h1>
       <app-popularni-gradovi class="popularni-gradovi"></app-popularni-gradovi>
     </div>
 
     <div class="hoteli">
-      <h1>Hoteli koji se sviđaju gostima</h1>
+      <h1>{{'HoteliKojiSeSvidjajuGostima'|transloco}}</h1>
       <app-visokoocjenjeni-hoteli></app-visokoocjenjeni-hoteli>
     </div>
 
-    <!--<h1>Postavite pitanje</h1> -->
     <div class="postaviPitanje">
-      <h1>Postavite nam pitanje</h1>
+      <h1>{{'PostaviteNamPitanje'|transloco}}</h1>
       <mat-form-field [style.fontSize]="16" appearance="fill" id="forma">
-        <mat-label>Moje pitanje je...</mat-label>
+        <mat-label>{{'MojePitanjeJe'|transloco}}</mat-label>
         <textarea matInput
                   cdkTextareaAutosize
                   #autosize="cdkTextareaAutosize"
                   cdkAutosizeMinRows="1"
                   cdkAutosizeMaxRows="15" [(ngModel)]="tekstPitanja"></textarea>
       </mat-form-field>
-      <button mat-raised-button color="primary" (click)="PostaviPitanje()">Pošaljite pitanje</button>
+      <button mat-raised-button color="primary" (click)="PostaviPitanje()">{{'PosaljitePitanje'|transloco}}</button>
     </div>
   </div>
   <app-footer></app-footer>

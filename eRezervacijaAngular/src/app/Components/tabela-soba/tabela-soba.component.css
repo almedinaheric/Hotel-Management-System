@@ -1,0 +1,23 @@
+#amenities {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+}
+
+.mat-cell{
+  padding: 1rem;
+  width: 25%;
+}
+
+.mat-cell-amenities{
+  padding: 1rem;
+  width: 30%;
+}
+
+.cijena{
+  font-size: medium;
+  font-weight: 900;
+}
